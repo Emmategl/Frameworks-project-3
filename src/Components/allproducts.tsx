@@ -24,6 +24,9 @@ export type CartItemType = {
 const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('http://localhost:3000/products/info')).json();
 
+  const getBasket = async (): Promise<CartItemType[]> =>
+  await (await fetch('http://localhost:3000/customers/1/basket')).json();
+
 const ProductList = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
@@ -50,8 +53,8 @@ const ProductList = () => {
         });
         let data = await response.json();
         alert("Item Added To Cart");
-        console.log(data);
-        console.log(clickedItem.productId);
+         setCartItems((prev) => [...prev, clickedItem])
+         console.log(data)
       } catch (err) {
         alert("Something Went Wrong");
         console.log(err);
@@ -59,25 +62,45 @@ const ProductList = () => {
     }
 
 
-  const handleAddToCarta = (clickedItem: CartItemType) => {
-    setCartItems(prev => {
-      // 1. Is the item already added in the cart?
-      const isItemInCart = prev.find(item => item.productId === clickedItem.productId);
+  /* const handleAddToCarta = (clickedItem: CartItemType) => { */
+  /*   setCartItems(prev => { */
+  /*     // 1. Is the item already added in the cart? */
+  /*     const isItemInCart = prev.find(item => item.productId === clickedItem.productId); */
 
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.productId === clickedItem.productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-            console.log("hello")
-        );
-      }
-      
-      // First time the item is added
-      console.log("hello1")
-      return [...prev, { ...clickedItem, quantity: 1 }];
-    });
-  };
+  /*     if (isItemInCart) { */
+  /*       return prev.map(item => */
+  /*         item.productId === clickedItem.productId */
+  /*           ? { ...item, quantity: item.quantity + 1 } */
+  /*           : item, */
+  /*           console.log("hello") */
+  /*       ); */
+  /*     } */
+  /*      */
+  /*     // First time the item is added */
+  /*     console.log("hello1") */
+  /*     return [...prev, { ...clickedItem, quantity: 1 }]; */
+  /*   }); */
+  /* }; */
+
+  /* async function handleRemoveFrom(id: number) { */
+  /*   try { */
+  /*     const response = await fetch("hhttp://localhost:3000/customers/1/basket/", { */
+  /*       method: "DELETE", */
+  /*       body: JSON.stringify({ */
+  /*         productId: id, */
+  /*         quantity: 1, */
+  /*       }), */
+  /*       headers: { */
+  /*         "Content-type": "application/json; charset=UTF-8", */
+  /*       }, */
+  /*     }); */
+  /*     let data = await response.json(); */
+  /*     alert("Item Added To Cart"); */
+  /*   } catch (err) { */
+  /*     alert("Something Went Wrong"); */
+  /*     console.log(err); */
+  /*   } */
+  /* } */
 
   const handleRemoveFromCart = (id: number) => {
     setCartItems(prev =>

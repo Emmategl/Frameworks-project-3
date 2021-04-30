@@ -10,6 +10,8 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 // Styles
 import { Wrapper, StyledButton } from '../App.styles';
+import { useEffect } from 'react';
+import React from 'react';
 // Types
 export type CartItemType = {
   productId: number;
@@ -29,13 +31,34 @@ const getProducts = async (): Promise<CartItemType[]> =>
 
 const ProductList = () => {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([] as CartItemType[]);
+const [cartItems, setCartItems] = useState([] as CartItemType[]);
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
   );
+  
   console.log(data);
-
+  
+  const [cartItems, setCartItems] = useState({CartItemType: []});
+/*   React.useEffect(() => { */
+/*     async function fetchBookList() { */
+/*        */
+/*         const response = await fetch( */
+/*           `http://localhost:3000/customers/1/basket` */
+/*         ); */
+/*         const json = await response.json(); */
+/*         // console.log(json); */
+/*         setCartItems( */
+/*           json.items.map((item: { volumeInfo: { title: any; }; }) => { */
+/*             console.log(item.volumeInfo.title); */
+/*             return item.volumeInfo.title; */
+/*           }) */
+/*         ); */
+/*       } catch (error) { */
+/*         return error */
+/*       } */
+/* }} */
+/*  */
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.quantity, 0);
 

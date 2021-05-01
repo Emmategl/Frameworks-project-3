@@ -66,7 +66,7 @@ React.useEffect(() => {
     .then((cartItems) => {
       setCartItems(cartItems);
     })
-}, []);
+}, [cartItems]);
 
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
@@ -101,9 +101,7 @@ React.useEffect(() => {
 
     async function handleAddToCart(clickedItem: CartItemType) {
       try {
-
         const isItemInCart = (await getBasket()).some(item => item.productId === clickedItem.productId); 
-        console.log(isItemInCart)
         if (isItemInCart) {
           const response = await fetch("http://localhost:3000/customers/1/basket/" + clickedItem.productId + "/1", {
             method: "PUT",
@@ -111,14 +109,8 @@ React.useEffect(() => {
               "Content-type": "application/json; charset=UTF-8",
             },
           });
-          return cartItems.map(item =>
-            item.productId === clickedItem.productId
-              ? { ...item, quantity: item.quantity + 1 }
-              : item,
-              console.log("hello")
-          ); 
+          return
         } 
-
         const response = await fetch("http://localhost:3000/customers/1/basket", {
           method: "POST",
           body: JSON.stringify({
@@ -131,8 +123,7 @@ React.useEffect(() => {
         });
         let data = await response.json();
         alert("Item Added To Cart");
-         setCartItems((prev) => [...prev, clickedItem])
-         console.log(data)
+        return setCartItems((prev) => [...prev, clickedItem])
       } catch (err) {
         alert("Something Went Wrong");
         console.log(err);
@@ -140,7 +131,7 @@ React.useEffect(() => {
     }
 
 
-  /* const handleAddToCarta = (clickedItem: CartItemType) => { */
+  /* const handleAddToCart = (clickedItem: CartItemType) => { */
   /*   setCartItems(prev => { */
   /*     // 1. Is the item already added in the cart? */
   /*     const isItemInCart = prev.find(item => item.productId === clickedItem.productId); */

@@ -12,6 +12,7 @@ import Badge from '@material-ui/core/Badge';
 import { Wrapper, StyledButton } from '../App.styles';
 import { useEffect } from 'react';
 import React from 'react';
+
 // Types
 export type CartItemType = {
   productId: number;
@@ -26,20 +27,72 @@ export type CartItemType = {
 const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('http://localhost:3000/products/info')).json();
 
-  const getBasket = async (): Promise<CartItemType[]> =>
-  await (await fetch('http://localhost:3000/customers/1/basket')).json();
+  /* const getBasket = async (): Promise<CartItemType[]> => */
+  /* await (await fetch('http://localhost:3000/customers/1/basket')).json(); */
+
+
+  /* const getBasket = async () => { */
+  /*   const res = await fetch("http://localhost:3000/customers/1/basket"); */
+  /*   return res.json(); */
+  /* }; */
+
 
 const ProductList = () => {
+
   const [cartOpen, setCartOpen] = useState(false);
+/* const [cartItems, setCartItems] = useState([] as CartItemType[]); */
+/* const [cartItems, setCartItems] = useState([] as CartItemType[]); */
+
+/* const getBasket = async () => { */
+/*   fetch('ttp://localhost:3000/customers/1/basket') */
+/*     .then(response => response.json()) */
+/*     .then(json => { */
+/*       setCartItems({ cartItems: json }); */
+/*     }); */
+/* } */
+/* const [state, setState] = useState([]) */
+/* useEffect(() => { */
+/*     fetch("/api/data") */
+/*     .then( */
+/*         res => setState(res.data) */
+/*     ) */
+/* }) */
+
 const [cartItems, setCartItems] = useState([] as CartItemType[]);
+
+
+React.useEffect(() => {
+  fetch('http://localhost:3000/customers/1/basketDetails')
+    .then((response) => response.json())
+    .then((cartItems) => {
+      setCartItems(cartItems);
+    })
+}, []);
+
+
+/* useEffect(() =>{ */
+/*   fetch('http://localhost:3000/customers/1/basketDetails') */
+/*       .then(response => response.json()) */
+/*       .then(({ data: cartItems}) => { */
+/*           setCartItems(cartItems); */
+/*       }); */
+/* }, [] ); */
+/*  */
+
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
   );
   
   console.log(data);
-  
-  const [cartItems, setCartItems] = useState({CartItemType: []});
+  /* const [data, isLoading, error] = useQuery<CartItemType[]>( */
+  /*   'basket' */
+  /*   getBasket */
+  /* ); */
+
+/*   const { data, status } = useQuery("basket", getBasket); */
+
+ /*  const [cartItems, setCartItems] = useState({CartItemType: []}); */
 /*   React.useEffect(() => { */
 /*     async function fetchBookList() { */
 /*        */
@@ -142,6 +195,7 @@ const [cartItems, setCartItems] = useState([] as CartItemType[]);
   if (error) return <div>Something went wrong ...</div>;
 
   return (
+    
     <Wrapper>
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart

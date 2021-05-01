@@ -40,24 +40,7 @@ const getProducts = async (): Promise<CartItemType[]> =>
 
 const ProductList = () => {
 
-  const [cartOpen, setCartOpen] = useState(false);
-/* const [cartItems, setCartItems] = useState([] as CartItemType[]); */
-/* const [cartItems, setCartItems] = useState([] as CartItemType[]); */
-
-/* const getBasket = async () => { */
-/*   fetch('ttp://localhost:3000/customers/1/basket') */
-/*     .then(response => response.json()) */
-/*     .then(json => { */
-/*       setCartItems({ cartItems: json }); */
-/*     }); */
-/* } */
-/* const [state, setState] = useState([]) */
-/* useEffect(() => { */
-/*     fetch("/api/data") */
-/*     .then( */
-/*         res => setState(res.data) */
-/*     ) */
-/* }) */
+const [cartOpen, setCartOpen] = useState(false);
 
 const [cartItems, setCartItems] = useState([] as CartItemType[]);
 React.useEffect(() => {
@@ -76,28 +59,6 @@ React.useEffect(() => {
 
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.quantity, 0);
-
-    /* async function handleAddToCart(clickedItem: CartItemType) { */
-    /*   try { */
-    /*     const response = await fetch("http://localhost:3000/customers/1/basket", { */
-    /*       method: "POST", */
-    /*       body: JSON.stringify({ */
-    /*         productId: clickedItem.productId, */
-    /*         quantity: 1, */
-    /*       }), */
-    /*       headers: { */
-    /*         "Content-type": "application/json; charset=UTF-8", */
-    /*       }, */
-    /*     }); */
-    /*     let data = await response.json(); */
-    /*     alert("Item Added To Cart"); */
-    /*      setCartItems((prev) => [...prev, clickedItem]) */
-    /*      console.log(data) */
-    /*   } catch (err) { */
-    /*     alert("Something Went Wrong"); */
-    /*     console.log(err); */
-    /*   } */
-    /* } */
 
     async function handleAddToCart(clickedItem: CartItemType) {
       try {
@@ -130,59 +91,41 @@ React.useEffect(() => {
       }
     }
 
+  async function handleRemoveFromCart(id: number) {
+    try {
+      const response = await fetch("http://localhost:3000/customers/1/basket/", {
+        method: "DELETE",
+        body: JSON.stringify({
+          productId: id,
+          quantity: 1,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      alert("Item removed");
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
 
-  /* const handleAddToCart = (clickedItem: CartItemType) => { */
-  /*   setCartItems(prev => { */
-  /*     // 1. Is the item already added in the cart? */
-  /*     const isItemInCart = prev.find(item => item.productId === clickedItem.productId); */
-
-  /*     if (isItemInCart) { */
-  /*       return prev.map(item => */
-  /*         item.productId === clickedItem.productId */
-  /*           ? { ...item, quantity: item.quantity + 1 } */
-  /*           : item, */
-  /*           console.log("hello") */
-  /*       ); */
-  /*     } */
-  /*      */
-  /*     // First time the item is added */
-  /*     console.log("hello1") */
-  /*     return [...prev, { ...clickedItem, quantity: 1 }]; */
-  /*   }); */
-  /* }; */
-
-  /* async function handleRemoveFrom(id: number) { */
-  /*   try { */
-  /*     const response = await fetch("hhttp://localhost:3000/customers/1/basket/", { */
-  /*       method: "DELETE", */
-  /*       body: JSON.stringify({ */
-  /*         productId: id, */
-  /*         quantity: 1, */
-  /*       }), */
-  /*       headers: { */
-  /*         "Content-type": "application/json; charset=UTF-8", */
-  /*       }, */
-  /*     }); */
-  /*     let data = await response.json(); */
-  /*     alert("Item Added To Cart"); */
-  /*   } catch (err) { */
-  /*     alert("Something Went Wrong"); */
-  /*     console.log(err); */
-  /*   } */
-  /* } */
-
-  const handleRemoveFromCart = (id: number) => {
-    setCartItems(prev =>
-      prev.reduce((ack, item) => {
-        if (item.productId === id) {
-          if (item.quantity === 1) return ack;
-          return [...ack, { ...item, quantity: item.quantity - 1 }];
-        } else {
-          return [...ack, item];
-        }
-      }, [] as CartItemType[])
-    );
-  };
+  async function handleDecrementFromCart(id: number) {
+    try {
+      const response = await fetch("http://localhost:3000/customers/1/basket/" + id + "/-1", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      alert("Item decremented");
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
@@ -194,7 +137,7 @@ React.useEffect(() => {
         <Cart
           cartItems={cartItems}
           addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
+          removeFromCart={handleDecrementFromCart}
         />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>

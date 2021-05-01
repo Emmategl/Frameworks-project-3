@@ -10,6 +10,9 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 // Styles
 import { Wrapper, StyledButton } from '../App.styles';
+import { useEffect } from 'react';
+import React from 'react';
+import { kStringMaxLength } from 'node:buffer';
 // Types
 export type CartItemType = {
   productId: number;
@@ -21,14 +24,26 @@ export type CartItemType = {
   quantity: number;
 };
 
-
 const getCoffees = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3000/product/categories/coffee')).json();
+
+const getBasket = async (): Promise<CartItemType[]> =>
+await (await fetch('http://localhost:3000/customers/1/basketDetails')).json();
 
 
 const Coffees = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
+  React.useEffect(() => {
+  fetch('http://localhost:3000/customers/1/basketDetails')
+    .then((response) => response.json())
+    .then((cartItems) => {
+      setCartItems(cartItems);
+    })
+}, [cartItems]);
+
+
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getCoffees
@@ -38,35 +53,71 @@ const Coffees = () => {
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.quantity, 0);
 
-  const handleAddToCart = (clickedItem: CartItemType) => {
-    setCartItems(prev => {
-      // 1. Is the item already added in the cart?
-      const isItemInCart = prev.find(item => item.productId === clickedItem.productId);
-
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.productId === clickedItem.productId
-            ? { ...item, amount: item.quantity + 1 }
-            : item
-        );
+    async function handleAddToCart(clickedItem: CartItemType) {
+      try {
+        const isItemInCart = (await getBasket()).some(item => item.productId === clickedItem.productId); 
+        if (isItemInCart) {
+          const response = await fetch("http://localhost:3000/customers/1/basket/" + clickedItem.productId + "/1", {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          });
+          return
+        } 
+        const response = await fetch("http://localhost:3000/customers/1/basket", {
+          method: "POST",
+          body: JSON.stringify({
+            productId: clickedItem.productId,
+            quantity: 1,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        });
+        let data = await response.json();
+        alert("Item Added To Cart");
+        return setCartItems((prev) => [...prev, clickedItem])
+      } catch (err) {
+        alert("Something Went Wrong");
+        console.log(err);
       }
-      // First time the item is added
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
+    }
+  async function handleRemoveFromCart(id: number) {
+    try {
+      const response = await fetch("http://localhost:3000/customers/1/basket/", {
+        method: "DELETE",
+        body: JSON.stringify({
+          productId: id,
+          quantity: 1,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      alert("Item removed");
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
+  async function handleDecrementFromCart(id: number) {
+    try {
+      const response = await fetch("http://localhost:3000/customers/1/basket/" + id + "/-1", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      alert("Item decremented");
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
 
-  const handleRemoveFromCart = (id: number) => {
-    setCartItems(prev =>
-      prev.reduce((ack, item) => {
-        if (item.productId === id) {
-          if (item.quantity === 1) return ack;
-          return [...ack, { ...item, quantity: item.quantity - 1 }];
-        } else {
-          return [...ack, item];
-        }
-      }, [] as CartItemType[])
-    );
-  };
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
@@ -77,7 +128,7 @@ const Coffees = () => {
         <Cart
           cartItems={cartItems}
           addToCart={handleAddToCart}
-          removeFromCart={handleRemoveFromCart}
+          removeFromCart={handleDecrementFromCart}
         />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>

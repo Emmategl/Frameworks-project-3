@@ -12,6 +12,7 @@ import Badge from '@material-ui/core/Badge';
 import { Wrapper, StyledButton } from '../App.styles';
 import { useEffect } from 'react';
 import React from 'react';
+import { kStringMaxLength } from 'node:buffer';
 
 // Types
 export type CartItemType = {
@@ -27,8 +28,8 @@ export type CartItemType = {
 const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('http://localhost:3000/products/info')).json();
 
-  /* const getBasket = async (): Promise<CartItemType[]> => */
-  /* await (await fetch('http://localhost:3000/customers/1/basket')).json(); */
+  const getBasket = async (): Promise<CartItemType[]> =>
+  await (await fetch('http://localhost:3000/customers/1/basketDetails')).json();
 
 
   /* const getBasket = async () => { */
@@ -59,8 +60,6 @@ const ProductList = () => {
 /* }) */
 
 const [cartItems, setCartItems] = useState([] as CartItemType[]);
-
-
 React.useEffect(() => {
   fetch('http://localhost:3000/customers/1/basketDetails')
     .then((response) => response.json())
@@ -69,54 +68,57 @@ React.useEffect(() => {
     })
 }, []);
 
-
-/* useEffect(() =>{ */
-/*   fetch('http://localhost:3000/customers/1/basketDetails') */
-/*       .then(response => response.json()) */
-/*       .then(({ data: cartItems}) => { */
-/*           setCartItems(cartItems); */
-/*       }); */
-/* }, [] ); */
-/*  */
-
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
   );
-  
   console.log(data);
-  /* const [data, isLoading, error] = useQuery<CartItemType[]>( */
-  /*   'basket' */
-  /*   getBasket */
-  /* ); */
 
-/*   const { data, status } = useQuery("basket", getBasket); */
-
- /*  const [cartItems, setCartItems] = useState({CartItemType: []}); */
-/*   React.useEffect(() => { */
-/*     async function fetchBookList() { */
-/*        */
-/*         const response = await fetch( */
-/*           `http://localhost:3000/customers/1/basket` */
-/*         ); */
-/*         const json = await response.json(); */
-/*         // console.log(json); */
-/*         setCartItems( */
-/*           json.items.map((item: { volumeInfo: { title: any; }; }) => { */
-/*             console.log(item.volumeInfo.title); */
-/*             return item.volumeInfo.title; */
-/*           }) */
-/*         ); */
-/*       } catch (error) { */
-/*         return error */
-/*       } */
-/* }} */
-/*  */
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.quantity, 0);
 
+    /* async function handleAddToCart(clickedItem: CartItemType) { */
+    /*   try { */
+    /*     const response = await fetch("http://localhost:3000/customers/1/basket", { */
+    /*       method: "POST", */
+    /*       body: JSON.stringify({ */
+    /*         productId: clickedItem.productId, */
+    /*         quantity: 1, */
+    /*       }), */
+    /*       headers: { */
+    /*         "Content-type": "application/json; charset=UTF-8", */
+    /*       }, */
+    /*     }); */
+    /*     let data = await response.json(); */
+    /*     alert("Item Added To Cart"); */
+    /*      setCartItems((prev) => [...prev, clickedItem]) */
+    /*      console.log(data) */
+    /*   } catch (err) { */
+    /*     alert("Something Went Wrong"); */
+    /*     console.log(err); */
+    /*   } */
+    /* } */
+
     async function handleAddToCart(clickedItem: CartItemType) {
       try {
+
+        const isItemInCart = (await getBasket()).some(item => item.productId === clickedItem.productId); 
+        console.log(isItemInCart)
+        if (isItemInCart) {
+          const response = await fetch("http://localhost:3000/customers/1/basket/" + clickedItem.productId + "/1", {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          });
+          return cartItems.map(item =>
+            item.productId === clickedItem.productId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item,
+              console.log("hello")
+          ); 
+        } 
+
         const response = await fetch("http://localhost:3000/customers/1/basket", {
           method: "POST",
           body: JSON.stringify({

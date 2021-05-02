@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Link, match, NavLink, Route, Switch, useParams } from 'react-router-dom';
 import { useQuery } from "react-query";
+import { Wrapper } from "../App.styles";
+import { MyButtonGrid } from "../App";
+
 
 export type CartItemType = {
     productId: number;
@@ -10,9 +13,15 @@ export type CartItemType = {
     price: number;
     name: string;
     quantity: number;
+    longDescription: string;
   };
 
-const ProductDetails = ({match}: {match: any}) => {
+  type Props = {
+    handleAddToCart: (clickedItem: CartItemType) => void;
+    /* getDetails: (clickedItem: CartItemType) => void; */
+  };
+  
+const ProductDetails= ({match}: {match: any}) => {
       const getProduct = async (): Promise<CartItemType> =>
       await (await fetch('http://localhost:3000/products/'+ match.params.productId)).json(); 
       const {data} = useQuery<CartItemType>(
@@ -30,10 +39,16 @@ const ProductDetails = ({match}: {match: any}) => {
     /* console.log(product) */
     
 return (
+  <Wrapper>
+  <img src={data?.img_path} alt={data?.name} />
   <div>
- <p>Product name: {data?.name}</p> // gives error "Object is possibly 'undefined' and 
- <p>Product ID: {match.params.productId}</p> 
-</div>
+    <h3>{data?.name}</h3>
+    <p>{data?.description}</p>
+    <p>{data?.longDescription}</p>
+    <h3>${data?.price}</h3>
+  </div>
+  {/* <MyButtonGrid onClick={() => handleAddToCart(data)}>Add to cart</MyButtonGrid> */}
+</Wrapper>
 )
 }
 

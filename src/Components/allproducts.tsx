@@ -13,6 +13,7 @@ import { Wrapper, StyledButton } from '../App.styles';
 import { useEffect } from 'react';
 import React from 'react';
 import { kStringMaxLength } from 'node:buffer';
+import { Link } from 'react-router-dom';
 
 // Types
 export type CartItemType = {

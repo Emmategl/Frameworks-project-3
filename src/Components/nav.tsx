@@ -24,11 +24,16 @@ import ProductList from './allproducts';
 import Coffees from './coffees';
 import Teas from './teas';
 import Prod from './prod';
+import withRouter from './test';
+import ProdDetails from './prodDetails';
+import ProductDetails from './stack';
 import TopPicture from './topPictures';
 import Carousel from './carousel';
 import PictureBanner from './pictureBanner';
 import SignUp from './Login';
 import UserName from './UserName';
+import { Provider } from 'react-redux';
+import { profileEnd } from 'node:console';
 
 // Types
 export type CartItemType = {
@@ -53,6 +58,11 @@ const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('http://localhost:3000/customers/1/basketDetails')).json();
 
 
+  export function getById(id:any) {  
+    const requestOptions = { method: 'GET'}; 
+    return fetch('http://localhost:3000/products/'+id)
+  }
+
   /* const getBasket = async () => { */
   /*   const res = await fetch("http://localhost:3000/customers/1/basket"); */
   /*   return res.json(); */
@@ -72,6 +82,9 @@ const getProducts = async (): Promise<CartItemType[]> =>
               setCartItems(cartItemss);
             })
         }, [cartItemss]);
+
+
+
       
         async function handleDecrementFromCart(id: number) {
           try {
@@ -204,7 +217,9 @@ async function handleAddToCart(clickedItem: CartItemType) {
                 <Route path="/teas" component={Tea} />
                 <Route path="/login" component={Login} />
                 <Route path="/basket" component={Basket} />
-                <Route exact path="/id" component={ProductDescription} />
+                <Route exact path="/ti" component={Prod} />
+                <Route path="/:productId" render={(props) => <ProductDetails {...props} />} />
+                {/* <Route exact path="/ProductPage/:productId" component={Prod} /> */}
                 </Switch>
                 </nav>
                 </header>

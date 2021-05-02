@@ -29,7 +29,14 @@ const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
       <h3>${item.price}</h3>
     </div>
     {/* <Button onClick={() => getDetails(item)}>See </Button> */}
-    <Link to='allproducts/:name'>ferefrefr</Link> 
+    <Link to={{
+     pathname: `${item.productId}`,
+     state: {
+     productObject: item
+     }
+   }}>
+     Product page
+   </Link>
     
     <MyButtonGrid onClick={() => handleAddToCart(item)}>Add to cart</MyButtonGrid>
   </Wrapper>

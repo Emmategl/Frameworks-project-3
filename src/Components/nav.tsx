@@ -217,7 +217,7 @@ async function handleAddToCart(clickedItem: CartItemType) {
     return (
         <div>
           <TopPicture/>
-          <Carousel/>
+          {/* <Carousel/> */}
           <PictureBanner/>
         </div>
       );

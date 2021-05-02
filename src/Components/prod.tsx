@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+/* import { CartItemType } from "./allproducts"; */
 
-export type Products = {
+const getProducts = async (): Promise<CartItemType[]> =>
+  await (await fetch('http://localhost:3000/products/info')).json();
+  
+  
+  type CartItemType = {
     productId: number;
     category: string;
     description: string;
@@ -10,105 +16,77 @@ export type Products = {
     name: string;
     quantity: number;
   };
+
+/* const Prod = (productId: any) => { */
+/*   const [isLoading, setIsLoading] = useState(true); */
+/*   const [data, setData] = useState([] as CartItemType[]); */
+/*   useEffect(() => { */
+/*     fetch(`http://localhost:3000/products/${productId}`, {}) */
+/*       .then((res) => res.json()) */
+/*       .then((response) => { */
+/*         setData(response); */
+/*         setIsLoading(false); */
+/*         console.log(`http://localhost:3000/products/${productId}`) */
+/*       }) */
+/*       .catch((error) => console.log(error)); */
+/*   }, [productId]); */
+/*  */
+
+
+
+
+
+
+
+  const Prod = (productId: any) => {
+
+    const getProduct = async (): Promise<CartItemType[]> =>
+    await (await fetch('http://localhost:3000/products/2')).json(); 
   
-export const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [hasError, setError] = useState(false);
-  async function fetchData() {
-    const res = await fetch("http://localhost:3000/products/info");
-    res
-      .json()
-      .then((res) => {
-        console.log(res.data);
-        setProducts(res.data);
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  }
-  async function addToCart(id: any, quantity: number) {
-    try {
-      const response = await fetch("http://localhost:3000/customers/1/basket", {
-        method: "POST",
-        body: JSON.stringify({
-          productId: id,
-          quantity: quantity,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-      let data = await response.json();
-      alert("Item Added To Cart");
-      console.log(data);
-    } catch (err) {
-      alert("Something Went Wrong");
-      console.log(err);
-    }
-  }
-  useEffect(() => {
-    fetchData();
-  }, []);
-  console.log(products);
+    const { data, isLoading, error } = useQuery<CartItemType[]>(
+      'product',
+      getProduct
+    );
+  
+    console.log(data);
+    console.log('product')
+    console.log(getProduct);
+  
+  
+    /* console.log(d) */
+    /* const [isLoading, setIsLoading] = useState(true); */
+    /* const [data, setData] = useState([] as CartItemType[]); */
+    /* useEffect(() => { */
+    /*   fetch(`http://localhost:3000/products/2`) */
+    /*     .then((res) => res.json()) */
+    /*     .then((data) => { */
+    /*       setData(data); */
+    /*       setIsLoading(false); */
+    /*       console.log(`http://localhost:3000/products/1`) */
+    /*     }) */
+    /*     .catch((error) => console.log(error)); */
+    /* }, [data]); */
+
   return (
-    <main>
-      <section>
-        <div className="banner-innerpage">
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-md-6 align-self-center text-center">
-                <h1 className="title">Shop listing</h1>
-                <h6 className="subtitle op-8">
-                  We are small team of creative people working together
-                </h6>
-              </div>
-            </div>
+          <div className="product-des">
+         {/*  <h1 id="name">{e.name}</h1> */}
+          <button className="btn add">Add to cart</button>
           </div>
-        </div>
-      </section>
-      <section>
-        <div className="spacer">
-          <div className="container">
-            <div className="row mt-5">
-              <div className="col-lg-9">
-                <div className="row shop-listing">
-                  {products.map((product: any, i) => (
-                    <div className="col-lg-4">
-                      <div className="card shop-hover border-0">
-                        <img
-                          src={product.img_path}
-                          alt="wrapkit"
-                          className="img-fluid"
-                        />
-                        <div className="card-img-overlay align-items-center">
-                          <button
-                            onClick={(e) => addToCart(product.productId, 1)}
-                            className="btn btn-md btn-info"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                      <div className="card border-0">
-                        <h6>
-                          <a href="#" className="link">
-                            {product.name}{" "}
-                          </a>
-                        </h6>
-                        <h6 className="subtitle">by Wisdom</h6>
-                        <h5 className="font-medium m-b-30">
-                          $195 /{" "}
-                          <del className="text-muted line-through">$225</del>
-                        </h5>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-};
+        );
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default Prod;

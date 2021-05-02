@@ -127,6 +127,7 @@ const Teas = () => {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleDecrementFromCart}
+          removeFromCart2={handleRemoveFromCart}
         />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>

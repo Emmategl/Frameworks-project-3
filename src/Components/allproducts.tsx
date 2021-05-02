@@ -28,7 +28,7 @@ export type CartItemType = {
 const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('http://localhost:3000/products/info')).json();
 
-  const getBasket = async (): Promise<CartItemType[]> =>
+  export const getBasket = async (): Promise<CartItemType[]> =>
   await (await fetch('http://localhost:3000/customers/1/basketDetails')).json();
 
 
@@ -38,9 +38,9 @@ const getProducts = async (): Promise<CartItemType[]> =>
   /* }; */
 
 
-const ProductList = () => {
+ const ProductList = () => {
 
-const [cartOpen, setCartOpen] = useState(false);
+ const [cartOpen, setCartOpen] = useState(false);
 
 const [cartItems, setCartItems] = useState([] as CartItemType[]);
 React.useEffect(() => {
@@ -127,17 +127,45 @@ React.useEffect(() => {
     }
   }
 
+  function getDetails(){
+    console.log("Hello")
+  }
+
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
 
+  /* return ( */
+  /*   <Wrapper> */
+  {/*     <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}> */}
+  {/*       <Cart */}
+  /*         cartItems={cartItems} */
+  /*         addToCart={handleAddToCart} */
+  /*         removeFromCart={handleDecrementFromCart} */
+  /*       /> */
+  {/*     </Drawer> */}
+  {/*     <StyledButton onClick={() => setCartOpen(true)}> */}
+  {/*       <Badge badgeContent={getTotalItems(cartItems)} color='error'> */}
+  {/*         <AddShoppingCartIcon /> */}
+  {/*       </Badge> */}
+  {/*     </StyledButton> */}
+  {/*     <Grid container spacing={3}> */}
+  {/*       {data?.map(item => ( */}
+  /*         <Grid item key={item.productId} xs={12} sm={4}> */
+  {/*           <Item item={item} handleAddToCart={handleAddToCart} /> */}
+  {/*         </Grid> */}
+  /*       ))} */
+  {/*     </Grid> */}
+  {/*   </Wrapper> */}
+  /* ); */
+
   return (
-    
     <Wrapper>
       <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleDecrementFromCart}
+          removeFromCart2={handleRemoveFromCart}
         />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>
@@ -155,5 +183,22 @@ React.useEffect(() => {
     </Wrapper>
   );
 };
+
+/* return ( */
+/*   data?.map((product, i)=> { */
+/*   <div className="content"> */
+{/*   <div className="product-image"> */}
+{/*   <a className="links" href="productDescription.html"> */}
+{/*   <img src="${product.img_path}"></img></a> */}
+{/*   </div> */}
+{/*   <div className="product-info"> */}
+{/*   <h2 className="name">${product.name}</h2> */}
+{/*       <p className="des">${product.description}</p> */}
+{/*       <p className="price">Price: ${product.price} DKK</p> */}
+{/*       <button className="btn add">ADD TO CART</button> */}
+{/*   </div>     */}
+{/*   </div> */}
+/* })); */
+/* }; */
 
 export default ProductList;

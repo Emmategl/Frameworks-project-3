@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from "../Images/logo.png";
 /* import '../App.css'; */
 import '../style.css';
@@ -12,8 +12,15 @@ import Register from './Register';
 import ProductList from './allproducts';
 import Coffees from './coffees';
 import Teas from './teas';
-import {Products} from './prod';
+import Prod from './prod';
 import {Cart} from './car';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import Badge from '@material-ui/core/Badge';
+import { useState } from 'react';
+import {CartItemType} from './allproducts'
+import getBasket from './allproducts'
+// Styles
+import { Wrapper, StyledButton } from '../App.styles';
 
 import {
   BrowserRouter,
@@ -26,11 +33,31 @@ import {
 } from "react-router-dom";
 
 
+function E (){
+const [cartItems, setCartItems] = useState([] as CartItemType[]);
+React.useEffect(() => {
+  fetch('http://localhost:3000/customers/1/basketDetails')
+    .then((response) => response.json())
+    .then((cartItems) => {
+      setCartItems(cartItems);
+    })
+}, [cartItems]);
+}
+
+function Offee(f: boolean) {
+  const [cartOpen, setCartOpen] = useState(false);
+  setCartOpen(f)
+}
+
+const getTotalItems = (items: CartItemType[]) =>
+  items.reduce((ack: number, item) => ack + item.quantity, 0);
+
 class NavBar extends React.Component {
     render() {
       return (
         <div className="App">
           <BrowserRouter>
+
           <header>
           <Link className='logos' to='/'>
           <img className="logo" src={logo} alt="Hot Liquids" />
@@ -45,7 +72,7 @@ class NavBar extends React.Component {
                   </li>
                   <li>
                     <NavLink activeClassName="active" to="/basket">
-                      Basket
+                      <AddShoppingCartIcon onClick={() => Offee(true)}/>
                     </NavLink>
                   </li>
                 </ul>
@@ -73,7 +100,6 @@ class NavBar extends React.Component {
                     </NavLink>
                   </li>
                 </ul>
-                
                 <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/allproducts" component={AllProducts} />
@@ -81,6 +107,7 @@ class NavBar extends React.Component {
                 <Route path="/teas" component={Tea} />
                 <Route path="/login" component={Login} />
                 <Route path="/basket" component={Basket} />
+                <Route exact path="/id" component={ProductDescription} />
                 </Switch>
                 </nav>
                 </header>
@@ -136,6 +163,40 @@ function Home() {
   function Basket() {
     return <h2>Basket</h2>;
   }
+
+  function ProductDescription() {
+    return (
+      <div>
+       <Prod/>
+      </div>
+    );
+  }
+
+  /* const description = () => { */
+  /*   const [isLoading, setIsLoading] = useState(true); */
+  /*   const [data, setData] = useState(); */
+  /*  */
+  /*   useEffect(() => { */
+  /*     fetch("http://localhost:3000/products/5" + clickedItem.productId { */
+  /*       method: "GET" */
+  /*     }) */
+  /*       .then((res) => res.json()) */
+  /*       .then((response) => { */
+  /*         setData(response.results); */
+  /*         setIsLoading(false); */
+  /*       }) */
+  /*       .catch((error) => console.log(error)); */
+  /*   }, []); */
+  /*  */
+  /*   return ( */
+  /*     <> */
+  {/*       {!isLoading && */}
+  /*         data.map((person, index) => { */
+  /*           return <h5 key={index}>{person.name}</h5>; */
+  /*         })} */
+  {/*     </> */}
+  /*   ); */
+  /* }; */
   
 
 export default NavBar

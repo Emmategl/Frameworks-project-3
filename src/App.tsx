@@ -36,7 +36,6 @@ function App(){
     {/* <NavBar/> */}
     <Nav/>
     <Footer/>
-    <MyButton>Styled Components</MyButton>
     </>
   );
 }

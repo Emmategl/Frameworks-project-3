@@ -5,18 +5,17 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  border: 1px solid lightblue;
-  border-radius: 20px;
+  border: 2px solid rgb(176, 187, 170);
   height: 100%;
 
-  button {
-    border-radius: 0 0 20px 20px;
-  }
+  /* button { */
+  /*   border-radius: 0 0 20px 20px; */
+  /*   width: 50%; */
+  /* } */
 
   img {
-    max-height: 250px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 20px 20px 0 0;
   }
 
   div {

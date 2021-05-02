@@ -40,16 +40,16 @@ const getProducts = async (): Promise<CartItemType[]> =>
 
  const ProductList = () => {
 
- const [cartOpen, setCartOpen] = useState(false);
+ /* const [cartOpen, setCartOpen] = useState(false); */
 
-const [cartItems, setCartItems] = useState([] as CartItemType[]);
+const [cartItemss, setCartItems] = useState([] as CartItemType[]);
 React.useEffect(() => {
   fetch('http://localhost:3000/customers/1/basketDetails')
     .then((response) => response.json())
-    .then((cartItems) => {
-      setCartItems(cartItems);
+    .then((cartItemss) => {
+      setCartItems(cartItemss);
     })
-}, [cartItems]);
+}, [cartItemss]);
 
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
@@ -57,8 +57,8 @@ React.useEffect(() => {
   );
   console.log(data);
 
-  const getTotalItems = (items: CartItemType[]) =>
-    items.reduce((ack: number, item) => ack + item.quantity, 0);
+  /* const getTotalItems = (items: CartItemType[]) => */
+  /*   items.reduce((ack: number, item) => ack + item.quantity, 0); */
 
     async function handleAddToCart(clickedItem: CartItemType) {
       try {
@@ -91,45 +91,6 @@ React.useEffect(() => {
       }
     }
 
-  async function handleRemoveFromCart(id: number) {
-    try {
-      const response = await fetch("http://localhost:3000/customers/1/basket/", {
-        method: "DELETE",
-        body: JSON.stringify({
-          productId: id,
-          quantity: 1,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-      let data = await response.json();
-      alert("Item removed");
-    } catch (err) {
-      alert("Something Went Wrong");
-      console.log(err);
-    }
-  }
-
-  async function handleDecrementFromCart(id: number) {
-    try {
-      const response = await fetch("http://localhost:3000/customers/1/basket/" + id + "/-1", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-      let data = await response.json();
-      alert("Item decremented");
-    } catch (err) {
-      alert("Something Went Wrong");
-      console.log(err);
-    }
-  }
-
-  function getDetails(){
-    console.log("Hello")
-  }
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
@@ -160,19 +121,6 @@ React.useEffect(() => {
 
   return (
     <Wrapper>
-      <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItems={cartItems}
-          addToCart={handleAddToCart}
-          removeFromCart={handleDecrementFromCart}
-          removeFromCart2={handleRemoveFromCart}
-        />
-      </Drawer>
-      <StyledButton onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color='error'>
-          <AddShoppingCartIcon />
-        </Badge>
-      </StyledButton>
       <Grid container spacing={3}>
         {data?.map(item => (
           <Grid item key={item.productId} xs={12} sm={4}>
@@ -183,22 +131,5 @@ React.useEffect(() => {
     </Wrapper>
   );
 };
-
-/* return ( */
-/*   data?.map((product, i)=> { */
-/*   <div className="content"> */
-{/*   <div className="product-image"> */}
-{/*   <a className="links" href="productDescription.html"> */}
-{/*   <img src="${product.img_path}"></img></a> */}
-{/*   </div> */}
-{/*   <div className="product-info"> */}
-{/*   <h2 className="name">${product.name}</h2> */}
-{/*       <p className="des">${product.description}</p> */}
-{/*       <p className="price">Price: ${product.price} DKK</p> */}
-{/*       <button className="btn add">ADD TO CART</button> */}
-{/*   </div>     */}
-{/*   </div> */}
-/* })); */
-/* }; */
 
 export default ProductList;

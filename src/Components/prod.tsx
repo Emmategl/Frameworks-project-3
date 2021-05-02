@@ -33,11 +33,6 @@ const getProducts = async (): Promise<CartItemType[]> =>
 /*  */
 
 
-
-
-
-
-
   const Prod = (productId: any) => {
 
     const getProduct = async (): Promise<CartItemType[]> =>

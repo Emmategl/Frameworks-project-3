@@ -13,12 +13,23 @@ import ProductList from './allproducts';
 import Coffees from './coffees';
 import Teas from './teas';
 import Prod from './prod';
-import {Cart} from './car';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import { useState } from 'react';
 import {CartItemType} from './allproducts'
 import getBasket from './allproducts'
+import Item from '../Item/Item';
+import Cart from '../Cart/Cart';
+import {Props} from '../Cart/Cart';
+import handleRemoveFromCart from './allproducts';
+import handleDecrementFromCart from './allproducts';
+import handleAddToCart from './allproducts';
+import cartItemss from './allproducts';
+import cartOpen from './allproducts';
+import getProducts from './allproducts';
+import CartItem from '../CartItem/CartItem';
+
+
 // Styles
 import { Wrapper, StyledButton } from '../App.styles';
 
@@ -31,18 +42,8 @@ import {
   useParams,
   Link,
 } from "react-router-dom";
+import { Drawer } from '@material-ui/core';
 
-
-function E (){
-const [cartItems, setCartItems] = useState([] as CartItemType[]);
-React.useEffect(() => {
-  fetch('http://localhost:3000/customers/1/basketDetails')
-    .then((response) => response.json())
-    .then((cartItems) => {
-      setCartItems(cartItems);
-    })
-}, [cartItems]);
-}
 
 function Offee(f: boolean) {
   const [cartOpen, setCartOpen] = useState(false);
@@ -53,11 +54,11 @@ const getTotalItems = (items: CartItemType[]) =>
   items.reduce((ack: number, item) => ack + item.quantity, 0);
 
 class NavBar extends React.Component {
+  
     render() {
       return (
         <div className="App">
           <BrowserRouter>
-
           <header>
           <Link className='logos' to='/'>
           <img className="logo" src={logo} alt="Hot Liquids" />
@@ -99,6 +100,7 @@ class NavBar extends React.Component {
                       Teas
                     </NavLink>
                   </li>
+
                 </ul>
                 <Switch>
                 <Route exact path="/" component={Home} />

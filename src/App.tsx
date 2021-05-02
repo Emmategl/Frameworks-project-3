@@ -4,12 +4,14 @@ import logo from "./Images/logo.svg";
 import ProductList from './Components/allproducts';
 import NavBar from './Components/navBar';
 import Footer from './Components/footer';
+import Nav from './Components/nav';
 
 
 function App(){
   return (
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
+    <Nav/>
     <Footer/>
     </>
   );

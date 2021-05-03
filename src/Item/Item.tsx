@@ -1,23 +1,15 @@
-import Button from '@material-ui/core/Button';
 // Types
-import { CartItemType } from '../Components/allproducts';
+import { CartItemType } from '../Components/CartItemType';
 import {MyButtonGrid} from '../App';
 // Styles
 import { Wrapper } from './Item.styles';
 import {
-  BrowserRouter,
-  NavLink,
-  Route,
-  Switch,
-  useHistory,
-  useParams,
   Link,
 } from "react-router-dom";
 
 type Props = {
   item: CartItemType;
   handleAddToCart: (clickedItem: CartItemType) => void;
-  /* getDetails: (clickedItem: CartItemType) => void; */
 };
 
 const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
@@ -37,7 +29,6 @@ const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
    }}>
      Product page
    </Link>
-    
     <MyButtonGrid onClick={() => handleAddToCart(item)}>Add to cart</MyButtonGrid>
   </Wrapper>
 );

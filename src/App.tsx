@@ -1,10 +1,9 @@
 import React from 'react';
 import logo from "./Images/logo.svg";
 /* import './App.css'; */
-import ProductList from './Components/allproducts';
-import NavBar from './Components/navBar';
-import Footer from './Components/footer';
-import Nav from './Components/nav';
+import ProductList from './Pages/AllProducts/AllProducts';
+import Footer from './Components/Footer';
+import Nav from './Components/NavigationBar';
 import { MuiThemeProvider, createMuiTheme, styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -33,7 +32,6 @@ export const MyButtonGrid = styled(Button)({
 function App(){
   return (
     <>
-    {/* <NavBar/> */}
     <Nav/>
     <Footer/>
     </>

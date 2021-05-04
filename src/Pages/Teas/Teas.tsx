@@ -2,7 +2,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 // Components
-import Item from '../../Item/Item';
+import Item from '../../Components/Item/Item';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 // Functions

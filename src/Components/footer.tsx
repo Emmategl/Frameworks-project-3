@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import pic1 from "../Images/Homepage/Coffee.jpg";
 import pic2 from "../Images/Homepage/Tea.jpg";
 import '../Pages/style.css';
-import '../footer.css';
+import './footer.css';
 
 function Footer() {
     return (

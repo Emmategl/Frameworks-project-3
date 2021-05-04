@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import '../Pages/style.css';
-import '../navigation.css';
+import './navigation.css';
 // Components
-import Cart from '../Cart/Cart';
+import Cart from './Cart/Cart';
 import Drawer from '@material-ui/core/Drawer';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';

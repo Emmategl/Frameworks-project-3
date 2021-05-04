@@ -1,6 +1,13 @@
 import CartItem from '../CartItem/CartItem';
 import { Wrapper } from './Cart.styles';
 import { CartItemType } from '../CartItemType';
+import { useContext, useState } from 'react';
+import { FormContext } from '../../Pages/Login/FormContext';
+import { App } from '../../Pages/Login/FormContext';
+import {FormData} from '../../Pages/Login/LoginForm';
+import { LoginInfo } from '../../Pages/Login/FormContext';
+import { init } from '../../Pages/Login/FormContext';
+import { UserContext } from '../../Pages/Login/Context';
 
 export type Props =  {
   cartItems: CartItemType[];
@@ -11,11 +18,22 @@ export type Props =  {
 
 const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart, removeFromCart2 }) => {
   const calculateTotal = (items: CartItemType[]) =>
-    items.reduce((ack: number, item) => ack + item.quantity * item.price, 0);
+  items.reduce((ack: number, item) => ack + item.quantity * item.price, 0);
+  
+  const formContext = useContext(FormContext)
+  console.log(formContext)
+ /*  if (!formContext)
+    throw(new Error("FormContext is undefined!"))
+
+    let firstName = formContext.login.firstName;
+    let lastName = formContext.login.lastName;
+    let email = formContext.login.email; */
+
+    
 
   return (
     <Wrapper>
-      <h2>Your Shopping Cart</h2>
+      <h2>Your Shopping Cart </h2>
       {cartItems.length === 0 ? <p>No items in cart.</p> : null}
       {cartItems.map(item => (
         <CartItem

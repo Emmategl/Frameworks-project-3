@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../Pages/style.css';
 import './navigation.css';
 // Components
@@ -21,6 +21,14 @@ import UserName from '../Pages/Login/UserName';
 // Types
 import { CartItemType } from './CartItemType';
 import Home from '../Pages/Home/HomePage';
+import { LoginForm } from '../Pages/Login/LoginForm';
+import { App } from '../Pages/Login/FormContext';
+/* import { Login } from '../Pages/Login/FormContext'; */
+import { init } from '../Pages/Login/FormContext';
+/* import QuizForm from '../Pages/Login/new'; */
+import {IFormContext} from '../Pages/Login/FormContext';
+import { FormContext } from '../Pages/Login/FormContext';
+
 
  const NavigationBar = () => {
     const getTotalItems = (items: CartItemType[]) =>
@@ -28,7 +36,7 @@ import Home from '../Pages/Home/HomePage';
 
     const [cartOpen, setCartOpen] = useState(false);
 
-        const [cartItemss, setCartItems] = useState([] as CartItemType[]);
+    const [cartItemss, setCartItems] = useState([] as CartItemType[]);
         React.useEffect(() => {
           fetch('http://localhost:3000/customers/1/basketDetails')
             .then((response) => response.json())
@@ -96,7 +104,7 @@ import Home from '../Pages/Home/HomePage';
                 <Route path="/allproducts" component={AllProducts} />
                 <Route path="/coffees" component={Coffee} />
                 <Route path="/teas" component={Tea} />
-                <Route path="/login" component={Tea} />
+                <Route path="/login" component={Login} />
                 <Route path="/basket" component={Basket} />
                 <Route path="/:productId" render={(props) => <ProductDetails {...props} />} />
                 {/* <Route exact path="/ProductPage/:productId" component={Prod} /> */}
@@ -111,8 +119,7 @@ import Home from '../Pages/Home/HomePage';
   function Login() {
     return (
       <div>
-        <UserName/>
-        <SignUp/>
+        <App/>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { CartItemType } from '../CartItemType';
 import { Wrapper } from './CartItem.styles';
 import './Buttons.css';
 import {MyButton} from '../../App';
+import { CSSProperties } from 'react';
 
 type Props = {
   item: CartItemType;
@@ -12,6 +13,10 @@ type Props = {
   removeFromCart: (productId: number) => void;
   removeFromCart2: (productId: number) => void;
 };
+
+const myStyles: CSSProperties = {
+  textAlign: "center"
+}
 
 const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart, removeFromCart2 }) => (
   <Wrapper>
@@ -22,23 +27,22 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart, removeFrom
         <p>Total: ${(item.quantity * item.price).toFixed(2)}</p>
       </div>
       <div className='buttons'>
-        <MyButton className="button"
-          size='small'
-          disableElevation
-          variant='contained'
-          
-          onClick={() => removeFromCart(item.productId)}
-        >
-          -
-        </MyButton>
-        <p>{item.quantity}</p>
-        <MyButton
+        <MyButton 
           size='small'
           disableElevation
           variant='contained'
           onClick={() => addToCart(item)}
         >
           +
+        </MyButton>
+        <p style={myStyles}>Quantity: {item.quantity}</p>
+        <MyButton
+          size='small'
+          disableElevation
+          variant='contained'
+          onClick={() => removeFromCart(item.productId)}
+        >
+          -
         </MyButton>
         <MyButton
         size='small'

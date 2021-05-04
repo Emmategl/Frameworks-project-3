@@ -6,6 +6,7 @@ import Footer from './Components/Footer';
 import Nav from './Components/NavigationBar';
 import { MuiThemeProvider, createMuiTheme, styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Provider } from './Pages/Login/Context';
 
 export const MyButton = styled(Button)({
   background: 'rgb(224, 230, 221)',
@@ -20,6 +21,7 @@ export const MyButton = styled(Button)({
   color: 'black',
   height: 48,
   padding: '0 30px',
+  margin: "4px",
 });
 
 export const MyButtonGrid = styled(Button)({
@@ -29,11 +31,22 @@ export const MyButtonGrid = styled(Button)({
  }
 });
 
+export const MyButtonProductPage = styled(Button)({
+  background: 'rgb(224, 230, 221)',
+  color: 'black',
+  '&:hover': {
+    color: 'black',
+ }
+});
+
+
 function App(){
   return (
     <>
+    <Provider>
     <Nav/>
     <Footer/>
+    </Provider>
     </>
   );
 }

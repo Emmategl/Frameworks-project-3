@@ -5,8 +5,7 @@ import ProductList from './Pages/AllProducts/AllProducts';
 import Footer from './Components/Footer';
 import Nav from './Components/NavigationBar';
 import { MuiThemeProvider, createMuiTheme, styled } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { Provider } from './Pages/Login/Context';
+import Button from '@material-ui/core/Button'
 /* import { NameProvider } from './Pages/Login/NameContext'; */
 import { LoginProvider } from './Pages/Login/FormContext';
 

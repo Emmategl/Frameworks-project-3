@@ -3,11 +3,7 @@ import { Wrapper } from './Cart.styles';
 import { CartItemType } from '../CartItemType';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../Pages/Login/FormContext';
-import { LoginProvider } from '../../Pages/Login/FormContext';
 import {FormData} from '../../Pages/Login/LoginForm';
-import { LoginInfo } from '../../Pages/Login/FormContext';
-import { init } from '../../Pages/Login/FormContext';
-import { UserContext } from '../../Pages/Login/Context';
 import React from 'react';
 /* import { NameContext } from '../../Pages/Login/NameContext';
 import {useName} from '../../Pages/Login/NameContext'; */
@@ -23,21 +19,20 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, remove
   const calculateTotal = (items: CartItemType[]) =>
   items.reduce((ack: number, item) => ack + item.quantity * item.price, 0);
   
-  /* const name = useName(); */
 
   const formContext = useContext(FormContext)
   if (!formContext)
     throw(new Error("FormContext is undefined!"))
 
+    let email = formContext.login.email;
     let firstName = formContext.login.firstName;
     let lastName = formContext.login.lastName;
-    let email = formContext.login.email;
-    const [state, setState] = React.useState<FormData>({ firstName: firstName, lastName: lastName, email: email });
+    const [state, setState] = React.useState<FormData>({ email: email, firstName: firstName, lastName: lastName});
 
     
     return (
     <Wrapper>
-      <h2>Your Shopping Cart {state.lastName}</h2>
+      <h2>Your Shopping Cart {state.firstName}</h2>
       {cartItems.length === 0 ? <p>No items in cart.</p> : null}
       {cartItems.map(item => (
         <CartItem

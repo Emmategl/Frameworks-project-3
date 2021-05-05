@@ -33,14 +33,15 @@ export function LoginForm() {
     // check conext
     if (!formContext)
     throw(new Error("FormContext is undefined!"))
-    
+  
+  let email = formContext.login.email;
   let firstName = formContext.login.firstName;
   let lastName = formContext.login.lastName;
-  let email = formContext.login.email;
+  
 
   const history = useHistory()
 
-  const [state, setState] = React.useState<FormData>({ firstName: firstName, lastName: lastName, email: email });
+  const [state, setState] = React.useState<FormData>({email: email, firstName: firstName, lastName: lastName});
   const [errors, setErrors] = React.useState<FormErrors>({});
 
   const validateEmail = (value: string): FormErrors => {
@@ -55,7 +56,6 @@ export function LoginForm() {
     setState((prev) => ({ ...prev, ...{ email: event.target.value } }));
     setErrors((prev) => ({ ...prev, ...validateEmail(event.target.value) }));
   };
-  
 
   const validateFirstName = (value: string): FormErrors => {
     const regName: RegExp = /^([a-zA-Z]{2,}\s*)+$/;
@@ -67,6 +67,12 @@ export function LoginForm() {
     return { firstName: undefined };
   };
 
+  const handleFirstName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState((prev) => ({ ...prev, ...{ firstName: event.target.value } }));
+    setErrors((prev) => ({ ...prev, ...validateFirstName(event.target.value) }));
+  };
+
+
   const validateLastName = (value: string): FormErrors => {
     const regName: RegExp = /^([a-zA-Z]{2,}\s*)+$/;
     if (!regName.test(value)) {
@@ -76,12 +82,7 @@ export function LoginForm() {
     }
     return { lastName: undefined };
   };
-
-  const handleFirstName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState((prev) => ({ ...prev, ...{ firstName: event.target.value } }));
-    setErrors((prev) => ({ ...prev, ...validateFirstName(event.target.value) }));
-  };
-
+  
   const handleLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({ ...prev, ...{ lastName: event.target.value } }));
     setErrors((prev) => ({ ...prev, ...validateLastName(event.target.value) }));

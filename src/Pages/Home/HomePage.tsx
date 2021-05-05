@@ -19,7 +19,7 @@ function Home() {
 
     return (
         <div>
-          <h4>{state.lastName}</h4>
+          <h4>{state.firstName}</h4>
           <TopPicture/>
           {/* <Carousel/> */}
           <PictureBanner/>

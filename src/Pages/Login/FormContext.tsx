@@ -7,19 +7,19 @@ import { CartItemType } from "../../Components/CartItemType";
 import { HandleAddToCart, HandleDecrementFromCart, HandleRemoveFromCart } from "../../Components/HandleAddToCart";
 
 export interface LoginInfo {
+    email: string,
     firstName: string,
     lastName: string,
-    email: string,
   }
 
  export const init = {
+    email: "",
     firstName: "",
-    lastName: "",
-    email: ""
+    lastName: ""
   }
 export interface IFormContext {
     login: LoginInfo;
-    updateName: (firstName:string, lastName:string, email:string) => void
+    updateName: (email:string, firstName:string, lastName:string) => void
   }
 
 // create context, but there is no default value - set it to undefined.
@@ -33,15 +33,14 @@ export const FormContext = React.createContext<IFormContext | undefined>(
 
   export function LoginProvider({children}: Props){
     const [login, updateName] = useState<LoginInfo>(init)
-    const updateNameFun = (firstName: string, lastName: string, email: string) => {
-        updateName((prev) => ({...prev, ...{email:email, firstname:firstName, lastName:lastName}})) 
+    const updateNameFun = (email: string, firstName: string, lastName: string) => {
+        updateName((prev) => ({...prev, ...{email:email, firstName:firstName, lastName:lastName}})) 
       }
 
 
       return (
         <FormContext.Provider value={{ login: login, updateName:updateNameFun}}>
           {children}
-          {/* <LoginForm/> */}
         </FormContext.Provider>
       );
 

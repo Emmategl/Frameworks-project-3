@@ -29,7 +29,7 @@ interface FormErrors {
 
 export function LoginForm() {
   
-  const  formContext = useContext(FormContext)
+  const formContext = useContext(FormContext)
     // check conext
     if (!formContext)
     throw(new Error("FormContext is undefined!"))

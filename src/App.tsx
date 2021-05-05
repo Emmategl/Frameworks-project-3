@@ -7,6 +7,9 @@ import Nav from './Components/NavigationBar';
 import { MuiThemeProvider, createMuiTheme, styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Provider } from './Pages/Login/Context';
+/* import { NameProvider } from './Pages/Login/NameContext'; */
+import { LoginProvider } from './Pages/Login/FormContext';
+
 
 export const MyButton = styled(Button)({
   background: 'rgb(224, 230, 221)',
@@ -43,10 +46,10 @@ export const MyButtonProductPage = styled(Button)({
 function App(){
   return (
     <>
-    <Provider>
+    <LoginProvider>
     <Nav/>
     <Footer/>
-    </Provider>
+    </LoginProvider>
     </>
   );
 }

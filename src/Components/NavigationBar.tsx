@@ -16,13 +16,13 @@ import ProductList from '../Pages/AllProducts/AllProducts';
 import Coffees from '../Pages/Coffees/Coffees';
 import Teas from '../Pages/Teas/Teas';
 import ProductDetails from '../Pages/ProductDescription/ProductDescription';
-import SignUp from '../Pages/Login/Login';
-import UserName from '../Pages/Login/UserName';
+import SignUp from '../Test/Login';
+import UserName from '../Test/UserName';
 // Types
 import { CartItemType } from './CartItemType';
 import Home from '../Pages/Home/HomePage';
 import { LoginForm } from '../Pages/Login/LoginForm';
-import { App } from '../Pages/Login/FormContext';
+import { LoginProvider } from '../Pages/Login/FormContext';
 /* import { Login } from '../Pages/Login/FormContext'; */
 import { init } from '../Pages/Login/FormContext';
 /* import QuizForm from '../Pages/Login/new'; */
@@ -52,8 +52,8 @@ import { FormContext } from '../Pages/Login/FormContext';
         <Cart
         cartItems={cartItemss}
         addToCart={HandleAddToCart}
-        removeFromCart={HandleDecrementFromCart}
-        removeFromCart2={HandleRemoveFromCart}
+        decrementFromCart={HandleDecrementFromCart}
+        removeFromCart={HandleRemoveFromCart}
           />
         </Drawer>
           <header>
@@ -119,7 +119,7 @@ import { FormContext } from '../Pages/Login/FormContext';
   function Login() {
     return (
       <div>
-        <App/>
+        <LoginForm/>
       </div>
     );
   }

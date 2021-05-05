@@ -10,15 +10,15 @@ import { CSSProperties } from 'react';
 type Props = {
   item: CartItemType;
   addToCart: (clickedItem: CartItemType) => void;
+  decrementFromCart: (productId: number) => void;
   removeFromCart: (productId: number) => void;
-  removeFromCart2: (productId: number) => void;
 };
 
 const myStyles: CSSProperties = {
   textAlign: "center"
 }
 
-const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart, removeFromCart2 }) => (
+const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeFromCart }) => (
   <Wrapper>
     <div>
       <h3>{item.name}</h3>
@@ -40,7 +40,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart, removeFrom
           size='small'
           disableElevation
           variant='contained'
-          onClick={() => removeFromCart(item.productId)}
+          onClick={() => decrementFromCart(item.productId)}
         >
           -
         </MyButton>
@@ -48,7 +48,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart, removeFrom
         size='small'
         disableElevation
         variant='contained'
-        onClick={() => removeFromCart2(item.productId)}
+        onClick={() => removeFromCart(item.productId)}
         >
         Remove
       </MyButton>

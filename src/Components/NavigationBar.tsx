@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import '../Pages/style.css';
 import './navigation.css';
 // Components
@@ -16,18 +16,10 @@ import ProductList from '../Pages/AllProducts/AllProducts';
 import Coffees from '../Pages/Coffees/Coffees';
 import Teas from '../Pages/Teas/Teas';
 import ProductDetails from '../Pages/ProductDescription/ProductDescription';
-import SignUp from '../Test/Login';
-import UserName from '../Test/UserName';
 // Types
 import { CartItemType } from './CartItemType';
 import Home from '../Pages/Home/HomePage';
 import { LoginForm } from '../Pages/Login/LoginForm';
-import { LoginProvider } from '../Pages/Login/FormContext';
-/* import { Login } from '../Pages/Login/FormContext'; */
-import { init } from '../Pages/Login/FormContext';
-/* import QuizForm from '../Pages/Login/new'; */
-import {IFormContext} from '../Pages/Login/FormContext';
-import { FormContext } from '../Pages/Login/FormContext';
 
 
  const NavigationBar = () => {
@@ -107,7 +99,6 @@ import { FormContext } from '../Pages/Login/FormContext';
                 <Route path="/login" component={Login} />
                 <Route path="/basket" component={Basket} />
                 <Route path="/:productId" render={(props) => <ProductDetails {...props} />} />
-                {/* <Route exact path="/ProductPage/:productId" component={Prod} /> */}
                 </Switch>
                 </nav>
                 </header>

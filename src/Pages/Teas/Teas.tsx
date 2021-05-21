@@ -13,7 +13,7 @@ import { Wrapper, StyledButton } from '../../App.styles';
 import { CartItemType } from '../../Components/CartItemType';
 
 const getTeas = async (): Promise<CartItemType[]> =>
-await (await fetch('http://localhost:3000/product/categories/tea')).json();
+await (await fetch('http://localhost:3000/product/categories/Tea')).json();
 
 const Teas = () => {
   const { data, isLoading, error } = useQuery<CartItemType[]>(

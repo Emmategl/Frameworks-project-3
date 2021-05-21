@@ -4,8 +4,7 @@ import { CartItemType } from "./CartItemType";
 export const getBasket = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3000/customers/1/basketDetails')).json();
 
-export const getProducts = async (): Promise<CartItemType[]> =>
-await (await fetch('http://localhost:3000/products/info')).json();
+
 
 export async function HandleAddToCart(clickedItem: CartItemType) {
     try {

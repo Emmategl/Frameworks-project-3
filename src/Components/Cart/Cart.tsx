@@ -5,8 +5,6 @@ import { useContext, useState } from 'react';
 import { FormContext } from '../../Pages/Login/FormContext';
 import {FormData} from '../../Pages/Login/LoginForm';
 import React from 'react';
-/* import { NameContext } from '../../Pages/Login/NameContext';
-import {useName} from '../../Pages/Login/NameContext'; */
 
 export type Props =  {
   cartItems: CartItemType[];
@@ -18,7 +16,6 @@ export type Props =  {
 const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, removeFromCart }) => {
   const calculateTotal = (items: CartItemType[]) =>
   items.reduce((ack: number, item) => ack + item.quantity * item.price, 0);
-  
 
   const formContext = useContext(FormContext)
   if (!formContext)

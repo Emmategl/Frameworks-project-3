@@ -12,7 +12,7 @@ import { CartItemType } from '../../Components/CartItemType';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
 
 const getCoffees = async (): Promise<CartItemType[]> =>
-await (await fetch('http://localhost:3000/product/categories/coffee')).json();
+await (await fetch('http://localhost:3000/product/categories/Coffee')).json();
 
 const Coffees = () => {
   const { data, isLoading, error } = useQuery<CartItemType[]>(

@@ -6,9 +6,11 @@ import Grid from '@material-ui/core/Grid';
 // Styles
 import { Wrapper, StyledButton } from '../../App.styles';
 import React from 'react';
-import { getProducts, HandleAddToCart } from '../../Components/HandleAddToCart';
+import { HandleAddToCart } from '../../Components/HandleAddToCart';
 import { CartItemType } from "../../Components/CartItemType";
 
+export const getProducts = async (): Promise<CartItemType[]> =>
+await (await fetch('http://localhost:3000/products/info')).json();
 
 export const ProductList = () => {
   const { data, isLoading, error } = useQuery<CartItemType[]>(

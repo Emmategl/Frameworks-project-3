@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  border: 2px solid rgb(176, 187, 170);
+  border: 1px solid rgb(176, 187, 170);
   height: 100%;
 
   /* button { */

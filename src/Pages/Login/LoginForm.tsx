@@ -3,15 +3,19 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import CSS from "csstype";
 import { useHistory } from "react-router-dom";
 import { FormContext } from "./FormContext";
+import { MyButton } from "../../App";
+import { Wrapper } from "../../App.styles";
 
 const divStyle: CSS.Properties = {
-  marginBottom: "10px",
+  marginBottom: "15px",
+
 };
 const labelStyle: CSS.Properties = {
   display: "inline-block",
-  width: "150px",
+  width: "100px",
   textAlign: "right",
-  marginRight: "10px",
+  marginRight: "15px",
+  
 };
 
 export interface FormData {
@@ -74,7 +78,7 @@ export function LoginForm() {
 
 
   const validateLastName = (value: string): FormErrors => {
-    const regName: RegExp = /^([a-zA-Z]{2,}\s*)+$/;
+    const regName: RegExp = /^([A-ZÆØÅa-zæøå]{2,}\s*)+$/;
     if (!regName.test(value)) {
       return { lastName: "Not a valid lastname" };
     } else if (value.length > 15) {
@@ -104,7 +108,7 @@ export function LoginForm() {
   };
 
   return (
-    <Container>
+    <Wrapper>
       <Row>
         <Col xs="4">
           <form onSubmit={onSubmit}>
@@ -155,18 +159,20 @@ export function LoginForm() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
+                padding: "20px",
+                alignItems: "left",
+                marginBottom: "500px",
               }}
-            >
-              <Button className="btn-primary" type="submit">
+              >
+              
+              <MyButton className="btn-primary" type="submit">
                 Save 
-              </Button>
-              <Button className="btn-secondary" onClick={() => history.goBack()}>Cancel</Button>
+              </MyButton>
+              <MyButton className="btn-secondary" onClick={() => history.goBack()}>Cancel</MyButton>
             </div>
           </form>
         </Col>
       </Row>
-    </Container>
+      </Wrapper>
   );
 }

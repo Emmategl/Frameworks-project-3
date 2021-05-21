@@ -10,11 +10,11 @@ export const Wrapper = styled.div`
 
   /* button { */
   /*   border-radius: 0 0 20px 20px; */
-  /*   width: 50%; */
+  /*   width: 100%; */
   /* } */
 
   img {
-    height: 250px;
+    height: 100%;
     object-fit: cover;
   }
 
@@ -22,5 +22,8 @@ export const Wrapper = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     padding: 1rem;
     height: 100%;
+   
+  
   }
+
 `;

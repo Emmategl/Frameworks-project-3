@@ -8,17 +8,27 @@ import { Wrapper, StyledButton } from '../../App.styles';
 import React from 'react';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
 import { CartItemType } from "../../Components/CartItemType";
+import MediaQuery from 'react-responsive'
+import { useMediaQuery } from 'react-responsive'
 
 export const getProducts = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3000/products/info')).json();
 
 export const ProductList = () => {
+  const isDesktopOrLaptop = useMediaQuery({query: '(min-device-width: 1025px)' })
+
+  const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
+
+  const isTablet = useMediaQuery({ query: '(min-width: 601px) and (max-width: 1024px)' })
+  
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
   );
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
+
+  
 
   return (
     <Wrapper>
@@ -32,6 +42,8 @@ export const ProductList = () => {
         We only deal with the best suppliers so we can ensure that you get the best possible quality.
         </p>
       <br></br>
+      
+      <MediaQuery minWidth={1024}>
       <Grid container spacing={3}>
         {data?.map(item => (
           <Grid item key={item.productId} xs={12} sm={3}>
@@ -39,6 +51,28 @@ export const ProductList = () => {
           </Grid>
         ))}
       </Grid>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={1024}>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.productId} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={600}>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.productId} xs={12} sm={7}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
+
     </Wrapper>
   );
 };

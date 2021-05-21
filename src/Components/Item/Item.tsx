@@ -3,7 +3,7 @@ import { CartItemType } from '../CartItemType';
 import {MyButtonGrid} from '../../App';
 // Styles
 import { Wrapper } from './Item.styles';
-import './Item.css';
+/* import './Item.css'; */
 import {
   Link,
 } from "react-router-dom";
@@ -26,7 +26,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
     <div>
       <h3>{item.name}</h3>
       <p>{item.description}</p>
-      <h3>${item.price}</h3>
+      <h4>{item.price} DKK</h4>
     </div>
     <MyButtonGrid onClick={() => handleAddToCart(item)}>Add to cart</MyButtonGrid>
   </Wrapper>

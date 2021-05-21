@@ -10,6 +10,7 @@ import React from 'react';
 // Types
 import { CartItemType } from '../../Components/CartItemType';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
+import DiscreteSlider from './slider';
 
 const getCoffees = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3000/product/categories/Coffee')).json();
@@ -35,6 +36,7 @@ const Coffees = () => {
         it is you who is in control. In addition, you can also add flavors you love and thus produce your very own specialty coffee.
       </p>
       <br></br>
+      <DiscreteSlider></DiscreteSlider>
       <Grid container spacing={3}>
         {data?.map(item => (
           <Grid item key={item.productId} xs={12} sm={3}>

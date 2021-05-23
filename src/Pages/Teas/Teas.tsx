@@ -12,6 +12,7 @@ import { Wrapper, StyledButton } from '../../App.styles';
 // Types
 import { CartItemType } from '../../Components/CartItemType';
 import MediaQuery from 'react-responsive';
+import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
 
 const getTeas = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3001/product/categories/Tea')).json();
@@ -22,7 +23,7 @@ const Teas = () => {
     getTeas
   );
 
-  if (isLoading) return <LinearProgress />;
+  if (isLoading) return <StyledLinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
 
   return (

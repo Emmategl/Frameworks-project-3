@@ -17,7 +17,7 @@ function ProductDescription ({match}: {match: any}) {
 
 return (
   <Wrapper>
-    <MediaQuery minWidth={800}>
+    <MediaQuery minWidth={768}>
   <div className="product">
     {data ? <> 
     <div className="product-img">
@@ -37,7 +37,7 @@ return (
     }
   </div>
   </MediaQuery>
-  <MediaQuery maxWidth={799}>
+  <MediaQuery maxWidth={767}>
   <div className="product">
     {data ? <> 
         <img id = "image" src={data.img_path} alt={data.name}>

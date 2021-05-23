@@ -11,6 +11,7 @@ import React from 'react';
 import { CartItemType } from '../../Components/CartItemType';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
 import MediaQuery from 'react-responsive';
+import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
 
 const getCoffees = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3001/product/categories/Coffee')).json();
@@ -20,7 +21,7 @@ const Coffees = () => {
     'products',
     getCoffees
   );
-  if (isLoading) return <LinearProgress />;
+  if (isLoading) return <StyledLinearProgress />;
   if (error) return <div>Something went wrong ...</div>;
 
   return (

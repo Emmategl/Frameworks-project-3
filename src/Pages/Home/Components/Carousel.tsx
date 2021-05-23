@@ -26,11 +26,11 @@ export const Carousel = () => {
     let email = formContext.login.email;
     const [state, setState] = React.useState<FormData>({ firstName: firstName, lastName: lastName, email: email });
 
-  const { data, isLoading, error } = useQuery<CartItemType[]>(
+  const { data, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
   );
-  if (isLoading) return <LinearProgress />;
+  
   if (error) return <div>Something went wrong ...</div>;
   
 

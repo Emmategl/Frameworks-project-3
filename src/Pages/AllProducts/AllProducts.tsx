@@ -10,25 +10,23 @@ import { HandleAddToCart } from '../../Components/HandleAddToCart';
 import { CartItemType } from "../../Components/CartItemType";
 import MediaQuery from 'react-responsive'
 import { useMediaQuery } from 'react-responsive'
+import { createStyles, withStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
+import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
+     
 
 export const getProducts = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3001/products/info')).json();
 
 export const ProductList = () => {
-  const isDesktopOrLaptop = useMediaQuery({query: '(min-device-width: 1025px)' })
-
-  const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
-
-  const isTablet = useMediaQuery({ query: '(min-width: 601px) and (max-width: 1024px)' })
-  
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
   );
-  if (isLoading) return <LinearProgress />;
-  if (error) return <div>Something went wrong ...</div>;
 
-  
+
+  if (isLoading) return <StyledLinearProgress color="primary"/>;
+  if (error) return <div>Something went wrong ...</div>;
 
   return (
     <Wrapper>

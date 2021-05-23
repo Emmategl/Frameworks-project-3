@@ -56,8 +56,8 @@ h6 span {
   background: rgb(0, 0, 0);
   background: rgb(203, 211, 199);
   padding: 10px; 
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 @media (max-width: 799px) {

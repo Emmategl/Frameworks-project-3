@@ -85,6 +85,11 @@ import { CartItemType } from './CartItemType';
                       Teas
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink activeClassName="active" to="/aboutus" activeStyle={{backgroundColor: 'rgb(176, 187, 170)'}}>
+                      About us
+                    </NavLink>
+                  </li>
                 </ul>
                 </nav>
                 </header>

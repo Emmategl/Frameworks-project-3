@@ -10,6 +10,7 @@ import { LoginForm } from './Pages/Login/LoginForm';
 import ProductDescription from './Pages/ProductDescription/ProductDescription';
 import UnderConstruction from './Pages/UnderConstruction/UnderConstruction';
 import ScrollUp from './Components/ScrollUp';
+import AboutUs from './Pages/AboutUs/AboutUs';
 /* import './App.css'; */
 
 function App(){
@@ -25,6 +26,7 @@ function App(){
                 <Route path="/coffees" component={Coffees} />
                 <Route path="/teas" component={Teas} />
                 <Route path="/login" component={LoginForm} />
+                <Route path="/aboutus" component={AboutUs} />
                 <Route path="/underconstruction" component={UnderConstruction} />
                 <Route path="/:productId" render={(props) => <ProductDescription {...props} />} />
     </Switch>

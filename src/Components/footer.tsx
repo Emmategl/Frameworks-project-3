@@ -29,6 +29,11 @@ function Footer() {
                       Teas
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink activeClassName="active" to="/aboutus" >
+                      About us
+                    </NavLink>
+                  </li>
                 </ul>
                 </div>
             <div className="information">

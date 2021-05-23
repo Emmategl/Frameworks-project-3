@@ -15,12 +15,6 @@ export const getProducts = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3001/products/info')).json();
 
 export const ProductList2 = () => {
-  const isDesktopOrLaptop = useMediaQuery({query: '(min-device-width: 1025px)' })
-
-  const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
-
-  const isTablet = useMediaQuery({ query: '(min-width: 601px) and (max-width: 1024px)' })
-  
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
@@ -38,8 +32,6 @@ export const ProductList2 = () => {
         filter or espresso coffee, have a look at our large selection. We not only select our coffee carefully, but also our
         selection of teas. That is why you can find a wide range of exclusive and tasty teas with us. Are you mostly into green,
         black or white tea? We have many exciting flavors and types of tea, so you can find the one that suits your taste buds.
-        We only deal with the best suppliers so we can ensure that you get the best possible quality.
-        We only deal with the best suppliers so we can ensure that you get the best possible quality.
         </p>
       <br></br>
       

@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { BasketContext, BasketProvider } from './Test/BasketContext';
 import { LoginProvider } from './Pages/Login/FormContext';
-import { BrowserRouter } from 'react-router-dom';
 
 const client = new QueryClient();
 

@@ -11,6 +11,7 @@ import { HandleAddToCart } from '../../Components/HandleAddToCart';
 import { Wrapper, StyledButton } from '../../App.styles';
 // Types
 import { CartItemType } from '../../Components/CartItemType';
+import MediaQuery from 'react-responsive';
 
 const getTeas = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3001/product/categories/Tea')).json();
@@ -38,6 +39,7 @@ const Teas = () => {
       a good experience when you buy tea and coffee online.
       </p>
       <br></br>
+      <MediaQuery minWidth={1024}>
       <Grid container spacing={3}>
         {data?.map(item => (
           <Grid item key={item.productId} xs={12} sm={3}>
@@ -45,6 +47,27 @@ const Teas = () => {
           </Grid>
         ))}
       </Grid>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={1024}>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.productId} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={600}>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.productId} xs={12} sm={7}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
     </Wrapper>
   );
 };

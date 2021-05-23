@@ -10,6 +10,7 @@ import { LoginForm } from './Pages/Login/LoginForm';
 import ProductDescription from './Pages/ProductDescription/ProductDescription';
 import UnderConstruction from './Pages/UnderConstruction/UnderConstruction';
 import ScrollUp from './Components/ScrollUp';
+/* import './App.css'; */
 
 function App(){
   return (

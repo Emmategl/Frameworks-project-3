@@ -10,6 +10,7 @@ import React from 'react';
 // Types
 import { CartItemType } from '../../Components/CartItemType';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
+import MediaQuery from 'react-responsive';
 
 const getCoffees = async (): Promise<CartItemType[]> =>
 await (await fetch('http://localhost:3001/product/categories/Coffee')).json();
@@ -35,6 +36,7 @@ const Coffees = () => {
         it is you who is in control. In addition, you can also add flavors you love and thus produce your very own specialty coffee.
       </p>
       <br></br>
+      <MediaQuery minWidth={1024}>
       <Grid container spacing={3}>
         {data?.map(item => (
           <Grid item key={item.productId} xs={12} sm={3}>
@@ -42,6 +44,27 @@ const Coffees = () => {
           </Grid>
         ))}
       </Grid>
+      </MediaQuery>
+
+       <MediaQuery maxWidth={1024}>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.productId} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={600}>
+      <Grid container spacing={3}>
+        {data?.map(item => (
+          <Grid item key={item.productId} xs={12} sm={7}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
     </Wrapper>
   );
 };

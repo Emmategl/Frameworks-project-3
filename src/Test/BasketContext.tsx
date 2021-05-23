@@ -10,7 +10,7 @@ export const BasketProvider: React.FC = ({children}) => {
     const itemsRef = useRef(cartItems);
     itemsRef.current = cartItems;
     React.useEffect(() => {
-      fetch('http://localhost:3000/customers/1/basketDetails')
+      fetch('http://localhost:3001/customers/1/basketDetails')
         .then((response) => response.json())
         .then((cartItems) => {
           setCartItems(cartItems);

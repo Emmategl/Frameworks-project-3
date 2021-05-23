@@ -19,11 +19,11 @@ ul {
       color:rgb(143, 140, 140);
   }
   
-  li {
+  nav li {
     float: left;
   }
   
-  li a {
+  nav li a {
     display: block;
     color: rgb(49, 48, 48);
     text-align: center;

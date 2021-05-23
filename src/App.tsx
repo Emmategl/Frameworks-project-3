@@ -1,13 +1,17 @@
 import React from 'react';
-import logo from "./Images/logo.svg";
-/* import './App.css'; */
 import ProductList from './Pages/AllProducts/AllProducts';
 import Footer from './Components/Footer';
 import Nav from './Components/NavigationBar';
 import { MuiThemeProvider, createMuiTheme, styled } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
-/* import { NameProvider } from './Pages/Login/NameContext'; */
-import { LoginProvider } from './Pages/Login/FormContext';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './Pages/Home/HomePage';
+import Coffees from './Pages/Coffees/Coffees';
+import Teas from './Pages/Teas/Teas';
+import { LoginForm } from './Pages/Login/LoginForm';
+import ProductDescription from './Pages/ProductDescription/ProductDescription';
+import UnderConstruction from './Pages/UnderConstruction/UnderConstruction';
+import ScrollUp from './Components/ScrollUp';
 
 
 
@@ -46,10 +50,24 @@ export const MyButtonProductPage = styled(Button)({
 function App(){
   return (
     <>
-    <LoginProvider>
+     <BrowserRouter>
+     <ScrollUp />
+    <div className="main-container">
     <Nav/>
+    <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/allproducts" component={ProductList} />
+                <Route path="/coffees" component={Coffees} />
+                <Route path="/teas" component={Teas} />
+                <Route path="/login" component={LoginForm} />
+                <Route path="/underconstruction" component={UnderConstruction} />
+                <Route path="/:productId" render={(props) => <ProductDescription {...props} />} />
+    </Switch>
+    </div>
+    <div className="footers">
     <Footer/>
-    </LoginProvider>
+    </div>
+    </BrowserRouter>
     </>
   );
 }

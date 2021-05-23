@@ -10,6 +10,7 @@ import { CartItemType } from '../../../Components/CartItemType';
 import { HandleAddToCart } from '../../../Components/HandleAddToCart';
 import { FormContext } from '../../Login/FormContext';
 import {FormData} from '../../../Pages/Login/LoginForm';
+import MediaQuery from 'react-responsive';
 
 
 export const getProducts = async (): Promise<CartItemType[]> =>
@@ -37,13 +38,29 @@ export const Carousel = () => {
     <Wrapper>
       <h2>See our best selling products {state.firstName}</h2>
       <br></br>
+      <MediaQuery minWidth={1024}>
       <Grid container spacing={3}>
-        {data?.map(item => (
+      {data?.map((item, index) => 
+        index < 4 &&
+        (
           <Grid item key={item.productId} xs={12} sm={3}>
             <Item item={item} handleAddToCart={HandleAddToCart} />
           </Grid>
         ))}
       </Grid>
+      </MediaQuery>
+
+      <MediaQuery maxWidth={1024}>
+      <Grid container spacing={3}>
+        {data?.map((item, index) => 
+        index < 3 &&
+        (
+          <Grid item key={item.productId} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={HandleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+      </MediaQuery>
     </Wrapper>
   );
 };

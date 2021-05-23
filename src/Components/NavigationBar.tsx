@@ -10,16 +10,11 @@ import Badge from '@material-ui/core/Badge';
 import { StyledButton } from '../App.styles';
 import { HandleAddToCart, HandleDecrementFromCart, HandleRemoveFromCart } from './HandleAddToCart';
 import React from 'react';
-import { BrowserRouter, Link, NavLink, Route, Switch } from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 import logo from "../Images/logo.png";
-import ProductList from '../Pages/AllProducts/AllProducts';
-import Coffees from '../Pages/Coffees/Coffees';
-import Teas from '../Pages/Teas/Teas';
-import ProductDetails from '../Pages/ProductDescription/ProductDescription';
 // Types
 import { CartItemType } from './CartItemType';
-import Home from '../Pages/Home/HomePage';
-import { LoginForm } from '../Pages/Login/LoginForm';
+
 
 
  const NavigationBar = () => {
@@ -39,7 +34,7 @@ import { LoginForm } from '../Pages/Login/LoginForm';
 
       return (
         <div className="App">
-          <BrowserRouter>
+          
           <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
         cartItems={cartItemss}
@@ -71,76 +66,30 @@ import { LoginForm } from '../Pages/Login/LoginForm';
                 </div>
                 <ul className="bottomNav">
                   <li>
-                    <NavLink exact activeClassName="active" to="/">
+                    <NavLink exact activeClassName="active" to="/" activeStyle={{backgroundColor: 'rgb(176, 187, 170)'}}>
                       Home
                     </NavLink>
                   </li>
                   <li>
-                  <NavLink exact activeClassName="active" to="/allproducts">
+                  <NavLink exact activeClassName="active" to="/allproducts" activeStyle={{backgroundColor: 'rgb(176, 187, 170)'}}>
                   All products
                   </NavLink>
                   </li>
                   <li>
-                    <NavLink activeClassName="active" to="/coffees">
+                    <NavLink activeClassName="active" to="/coffees" activeStyle={{backgroundColor: 'rgb(176, 187, 170)'}}>
                       Coffees
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink activeClassName="active" to="/teas">
+                    <NavLink activeClassName="active" to="/teas" activeStyle={{backgroundColor: 'rgb(176, 187, 170)'}}>
                       Teas
                     </NavLink>
                   </li>
                 </ul>
-                <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/allproducts" component={AllProducts} />
-                <Route path="/coffees" component={Coffee} />
-                <Route path="/teas" component={Tea} />
-                <Route path="/login" component={Login} />
-                <Route path="/basket" component={Basket} />
-                <Route path="/:productId" render={(props) => <ProductDetails {...props} />} />
-                </Switch>
                 </nav>
                 </header>
-        </BrowserRouter>
       </div>
     );
   }
   
-  function Login() {
-    return (
-      <div>
-        <LoginForm/>
-      </div>
-    );
-  }
-
-  function AllProducts() {
-    return (
-      <div>
-       <ProductList/>
-      </div>
-    );
-  }
-  
-  function Coffee() {
-    return (
-      <div>
-        <Coffees/>
-      </div>
-    );
-  }
-  
-  function Tea() {
-    return (
-      <div>
-       <Teas/>
-      </div>
-    );
-  }
-  
-  function Basket() {
-    return <h2>Basket</h2>;
-  }
-
 export default NavigationBar

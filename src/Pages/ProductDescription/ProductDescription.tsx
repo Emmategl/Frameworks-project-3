@@ -1,11 +1,10 @@
 import { useQuery } from "react-query";
 import { Wrapper } from "../../App.styles";
-import {HandleAddToCart} from "../../Components/HandleAddToCart";
+import {HandleAddToCart} from "../../Components/BasketFunctionality";
 import './ProductDescription.css';
 import { BasketItemType } from "../../Components/BasketItemType";
 import { MyButton } from '../../Components/Buttons/Buttons';
 import MediaQuery from "react-responsive";
-import construction from "../../Images/Construction/Construction.gif";
 
 function ProductDescription ({match}: {match: any}) {
       const getProduct = async (): Promise<BasketItemType> =>

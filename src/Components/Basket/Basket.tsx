@@ -1,4 +1,4 @@
-import CartItem from '../BasketItems/BasketItems';
+import CartItem from './BasketItems/BasketItems';
 import { BasketWrapper } from './Basket.styles';
 import { BasketItemType } from '../BasketItemType';
 import { useContext, useState } from 'react';
@@ -44,7 +44,7 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, remove
           removeFromCart={removeFromCart}
         />
       ))}
-      <h2>Total: {calculateTotal(cartItems).toFixed(2)} DKK</h2>
+      <h3>Total: {calculateTotal(cartItems).toFixed(2)} DKK</h3>
     </BasketWrapper>
   );
 };

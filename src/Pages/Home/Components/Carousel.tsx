@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { Wrapper, StyledButton } from '../../../App.styles';
 import React, { useContext } from 'react';
 import { BasketItemType } from '../../../Components/BasketItemType';
-import { HandleAddToCart } from '../../../Components/HandleAddToCart';
+import { HandleAddToCart } from '../../../Components/BasketFunctionality';
 import { FormContext } from '../../Login/FormContext';
 import {FormData} from '../../../Pages/Login/LoginForm';
 import MediaQuery from 'react-responsive';

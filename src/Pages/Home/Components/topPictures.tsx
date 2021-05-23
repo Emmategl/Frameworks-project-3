@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import pic1 from "../../../Images/Homepage/Coffee.jpg";
 import pic2 from "../../../Images/Homepage/Tea.jpg";
-import '../../style.css';
+/* import '../../style.css'; */
 
 function TopPicture() {
     return (

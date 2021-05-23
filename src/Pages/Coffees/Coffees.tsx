@@ -1,20 +1,16 @@
-import { useState } from 'react';
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
+
+import { useQuery} from 'react-query';
 // Components
 import Item from '../../Components/Item/Item';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 // Styles
-import { Wrapper, StyledButton } from '../../App.styles';
-import React from 'react';
+import { Wrapper} from '../../App.styles';
 // Types
 import { BasketItemType } from '../../Components/BasketItemType';
-import { HandleAddToCart } from '../../Components/HandleAddToCart';
+import { HandleAddToCart } from '../../Components/BasketFunctionality';
 import MediaQuery from 'react-responsive';
 import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
-
-const getCoffees = async (): Promise<BasketItemType[]> =>
-await (await fetch('http://localhost:3001/product/categories/Coffee')).json();
+import { getCoffees } from '../../Components/FetchFunctionality';
 
 const Coffees = () => {
   const { data, isLoading, error } = useQuery<BasketItemType[]>(

@@ -2,7 +2,7 @@
 import { BasketItemType } from '../BasketItemType';
 import {MyButtonGrid} from '../../Components/Buttons/Buttons';
 // Styles
-import { Wrapper } from './Item.styles';
+import { ItemWrapper } from './Item.styles';
 import {Link,} from "react-router-dom";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
-  <Wrapper>
+  <ItemWrapper>
     <Link to={{pathname: `${item.productId}`, state: {productObject: item}}}>
     <img src={item.img_path} alt={item.name} />
     </Link>
@@ -21,7 +21,7 @@ const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
       <h4>{item.price} DKK</h4>
     </div>
     <MyButtonGrid onClick={() => handleAddToCart(item)}>Add to cart</MyButtonGrid>
-  </Wrapper>
+  </ItemWrapper>
 );
 
 export default Item;

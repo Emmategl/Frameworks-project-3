@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import '../Pages/style.css';
-import './navigation.css';
+/* import '../Pages/style.css'; */
+/* import './navigation.css'; */
 // Components
 import Cart from './Basket/Basket';
 import Drawer from '@material-ui/core/Drawer';
@@ -8,14 +8,12 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 // Styles
 import { StyledButton } from '../App.styles';
-import { HandleAddToCart, HandleDecrementFromCart, HandleRemoveFromCart } from './HandleAddToCart';
+import { HandleAddToCart, HandleDecrementFromCart, HandleRemoveFromCart } from './BasketFunctionality';
 import React from 'react';
 import { Link, NavLink} from 'react-router-dom';
 import logo from "../Images/logo.png";
 // Types
 import { BasketItemType } from './BasketItemType';
-
-
 
  const NavigationBar = () => {
 

@@ -1,9 +1,8 @@
-import Button from '@material-ui/core/Button';
 // Types
-import { BasketItemType } from '../BasketItemType';
+import { BasketItemType } from '../../BasketItemType';
 // Styles
 import { BasketItemsWrapper } from './BasketItems.styles';
-import {MyButton} from '../Buttons/Buttons';
+import {MyButton} from '../../Buttons/Buttons';
 import { CSSProperties } from 'react';
 
 type Props = {

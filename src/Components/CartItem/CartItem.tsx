@@ -4,7 +4,7 @@ import { CartItemType } from '../CartItemType';
 // Styles
 import { Wrapper } from './CartItem.styles';
 import './Buttons.css';
-import {MyButton} from '../../App';
+import {MyButton} from '../../Components/Buttons/Buttons';
 import { CSSProperties } from 'react';
 
 type Props = {

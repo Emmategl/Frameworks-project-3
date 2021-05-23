@@ -18,8 +18,9 @@ import { CartItemType } from './CartItemType';
 
 
  const NavigationBar = () => {
-    const getTotalItems = (items: CartItemType[]) =>
-    items.reduce((ack: number, item) => ack + item.quantity, 0);
+
+    const displayAmount = (items: CartItemType[]) =>
+    items.reduce((items: number, item) => items + item.quantity, 0);
 
     const [cartOpen, setCartOpen] = useState(false);
 
@@ -34,7 +35,6 @@ import { CartItemType } from './CartItemType';
 
       return (
         <div className="App">
-          
           <Drawer anchor='right' open={cartOpen} onClose={() => setCartOpen(false)}>
         <Cart
         cartItems={cartItemss}
@@ -57,7 +57,7 @@ import { CartItemType } from './CartItemType';
                   </li>
                   <li>
                   <StyledButton onClick={() => setCartOpen(true)}>
-                <Badge badgeContent={getTotalItems(cartItemss)} color='error'>
+                <Badge badgeContent={displayAmount(cartItemss)} color='error'>
                 <AddShoppingCartIcon />
                 </Badge>
                 </StyledButton>

@@ -1,8 +1,5 @@
-import React from "react";
 import '../Pages/style.css';
-import { BrowserRouter, Link, NavLink, Route, Switch } from 'react-router-dom';
-import Home from "../Pages/Home/HomePage";
-import { ProductList } from "../Pages/AllProducts/AllProducts";
+import {NavLink} from 'react-router-dom';
 import './footer.css';
 
 function Footer() {
@@ -68,7 +65,6 @@ function Footer() {
     </footer>
     );
   }
-
 
   export default Footer;
 

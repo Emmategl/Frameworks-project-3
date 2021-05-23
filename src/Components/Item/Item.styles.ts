@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
 
   div {
     font-family: Arial, Helvetica, sans-serif;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     height: 100%;
    
   

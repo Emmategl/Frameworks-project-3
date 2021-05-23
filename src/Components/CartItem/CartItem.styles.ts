@@ -18,8 +18,8 @@ export const Wrapper = styled.div`
   }
 
   img {
-    max-width: 80px;
+    max-width: 120px;
     object-fit: cover;
-    margin-left: 40px;
+    margin: 20px;
   }
 `;

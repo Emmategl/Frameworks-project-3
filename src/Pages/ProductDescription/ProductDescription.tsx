@@ -5,7 +5,7 @@ import './ProductDescription.css';
 import { CartItemType } from "../../Components/CartItemType";
 import noproduct from "./../../Images/noproduct.png"
 import React from "react";
-import { MyButton, MyButtonGrid, MyButtonProductPage } from "../../App";
+import { MyButton, MyButtonGrid, MyButtonProductPage } from '../../Components/Buttons/Buttons';
 import { Box } from '@material-ui/core'
 import MediaQuery from "react-responsive";
 

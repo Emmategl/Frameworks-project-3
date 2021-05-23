@@ -1,6 +1,6 @@
 // Types
 import { CartItemType } from '../CartItemType';
-import {MyButtonGrid} from '../../App';
+import {MyButtonGrid} from '../../Components/Buttons/Buttons';
 // Styles
 import { Wrapper } from './Item.styles';
 /* import './Item.css'; */

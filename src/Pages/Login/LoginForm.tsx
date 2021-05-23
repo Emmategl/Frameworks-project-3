@@ -3,7 +3,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import CSS from "csstype";
 import { useHistory } from "react-router-dom";
 import { FormContext } from "./FormContext";
-import { MyButton } from "../../App";
+import { MyButton } from '../../Components/Buttons/Buttons';
 import { Wrapper } from "../../App.styles";
 
 const divStyle: CSS.Properties = {

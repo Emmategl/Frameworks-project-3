@@ -12,7 +12,7 @@ import MediaQuery from 'react-responsive'
 import { useMediaQuery } from 'react-responsive'
 
 export const getProducts = async (): Promise<CartItemType[]> =>
-await (await fetch('http://localhost:3000/products/info')).json();
+await (await fetch('http://localhost:3001/products/info')).json();
 
 export const ProductList = () => {
   const isDesktopOrLaptop = useMediaQuery({query: '(min-device-width: 1025px)' })

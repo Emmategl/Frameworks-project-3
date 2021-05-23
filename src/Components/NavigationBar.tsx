@@ -30,7 +30,7 @@ import { LoginForm } from '../Pages/Login/LoginForm';
 
     const [cartItemss, setCartItems] = useState([] as CartItemType[]);
         React.useEffect(() => {
-          fetch('http://localhost:3000/customers/1/basketDetails')
+          fetch('http://localhost:3001/customers/1/basketDetails')
             .then((response) => response.json())
             .then((cartItemss) => {
               setCartItems(cartItemss);

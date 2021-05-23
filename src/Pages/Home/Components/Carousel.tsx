@@ -13,7 +13,7 @@ import {FormData} from '../../../Pages/Login/LoginForm';
 
 
 export const getProducts = async (): Promise<CartItemType[]> =>
-await (await fetch('http://localhost:3000/product/popularity/1')).json();
+await (await fetch('http://localhost:3001/product/popularity/1')).json();
 
 export const Carousel = () => {
     const formContext = useContext(FormContext)

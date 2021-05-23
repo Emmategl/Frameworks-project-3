@@ -36,7 +36,10 @@ export const Carousel = () => {
 
   return (
     <Wrapper>
-      <h2>See our best selling products {state.firstName}</h2>
+      {state.firstName ? <>
+      <h2>{state.firstName}, see our best selling products</h2>
+      </> : <h2>See our best selling products</h2>
+      }
       <br></br>
       <MediaQuery minWidth={1024}>
       <Grid container spacing={3}>

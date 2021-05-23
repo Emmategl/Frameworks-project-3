@@ -11,7 +11,6 @@ import ProductDescription from './Pages/ProductDescription/ProductDescription';
 import UnderConstruction from './Pages/UnderConstruction/UnderConstruction';
 import ScrollUp from './Components/ScrollUp';
 
-
 function App(){
   return (
     <>

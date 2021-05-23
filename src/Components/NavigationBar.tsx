@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../Pages/style.css';
 import './navigation.css';
 // Components
-import Cart from './Cart/Cart';
+import Cart from './Basket/Basket';
 import Drawer from '@material-ui/core/Drawer';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
@@ -48,13 +48,8 @@ import { CartItemType } from './CartItemType';
           <img className="logo" src={logo} alt="Hot Liquids" />
             </Link> 
           <nav>
-                <div className='topnav-right'>
+              <div className='topnav-right'>
                 <ul className="topNav">
-                  <li>
-                    <NavLink activeClassName="active" to="/login">
-                      Login
-                    </NavLink>
-                  </li>
                   <li>
                   <StyledButton onClick={() => setCartOpen(true)}>
                 <Badge badgeContent={displayAmount(cartItemss)} color='error'>
@@ -62,8 +57,13 @@ import { CartItemType } from './CartItemType';
                 </Badge>
                 </StyledButton>
                   </li>
+                  <li> 
+                    <NavLink activeClassName="active" to="/login">
+                      Login
+                    </NavLink>
+                  </li>
                 </ul>
-                </div>
+              </div>
                 <ul className="bottomNav">
                   <li>
                     <NavLink exact activeClassName="active" to="/" activeStyle={{backgroundColor: 'rgb(176, 187, 170)'}}>

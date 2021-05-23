@@ -1,10 +1,12 @@
-import CartItem from '../CartItem/CartItem';
-import { Wrapper } from './Cart.styles';
+import CartItem from '../BasketItems/BasketItem';
+import { Wrapper } from './Basket.styles';
 import { CartItemType } from '../CartItemType';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../Pages/Login/FormContext';
 import {FormData} from '../../Pages/Login/LoginForm';
 import React from 'react';
+import { MyButton } from '../Buttons/Buttons';
+
 
 export type Props =  {
   cartItems: CartItemType[];
@@ -25,11 +27,13 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, remove
     let firstName = formContext.login.firstName;
     let lastName = formContext.login.lastName;
     const [state, setState] = React.useState<FormData>({ email: email, firstName: firstName, lastName: lastName});
-
     
     return (
     <Wrapper>
-      <h2>Your Shopping Cart {state.firstName}</h2>
+      {state.firstName ? <>
+      <h2>{state.firstName}, here is your current basket</h2>
+      </> : <h2>Your current basket</h2>
+      }
       {cartItems.length === 0 ? <p>No items in cart.</p> : null}
       {cartItems.map(item => (
         <CartItem

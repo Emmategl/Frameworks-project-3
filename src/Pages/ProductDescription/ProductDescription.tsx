@@ -3,13 +3,9 @@ import { Wrapper } from "../../App.styles";
 import {HandleAddToCart} from "../../Components/HandleAddToCart";
 import './ProductDescription.css';
 import { CartItemType } from "../../Components/CartItemType";
-import noproduct from "./../../Images/noproduct.png"
-import React from "react";
-import { MyButton, MyButtonGrid, MyButtonProductPage } from '../../Components/Buttons/Buttons';
-import { Box } from '@material-ui/core'
+import { MyButton } from '../../Components/Buttons/Buttons';
 import MediaQuery from "react-responsive";
-
-
+import construction from "../../Images/Construction/Construction.gif";
 
 function ProductDescription ({match}: {match: any}) {
       const getProduct = async (): Promise<CartItemType> =>
@@ -54,7 +50,7 @@ return (
         <p id="des">{data.longDescription}</p>
         <MyButton onClick={() => HandleAddToCart(data)}>Add to cart</MyButton>
     </div> </> : <h1>Loading...</h1>
-    }
+   }
   </div>
   </MediaQuery>
 </Wrapper>

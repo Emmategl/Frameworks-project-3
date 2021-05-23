@@ -13,18 +13,18 @@ import React from 'react';
 import { Link, NavLink} from 'react-router-dom';
 import logo from "../Images/logo.png";
 // Types
-import { CartItemType } from './CartItemType';
+import { BasketItemType } from './BasketItemType';
 
 
 
  const NavigationBar = () => {
 
-    const displayAmount = (items: CartItemType[]) =>
+    const displayAmount = (items: BasketItemType[]) =>
     items.reduce((items: number, item) => items + item.quantity, 0);
 
     const [cartOpen, setCartOpen] = useState(false);
 
-    const [cartItemss, setCartItems] = useState([] as CartItemType[]);
+    const [cartItemss, setCartItems] = useState([] as BasketItemType[]);
         React.useEffect(() => {
           fetch('http://localhost:3001/customers/1/basketDetails')
             .then((response) => response.json())

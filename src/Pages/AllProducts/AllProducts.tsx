@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { Wrapper, StyledButton } from '../../App.styles';
 import React from 'react';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
-import { CartItemType } from "../../Components/CartItemType";
+import { BasketItemType } from "../../Components/BasketItemType";
 import MediaQuery from 'react-responsive'
 import { useMediaQuery } from 'react-responsive'
 import { createStyles, withStyles } from '@material-ui/styles';
@@ -15,11 +15,11 @@ import { Theme } from '@material-ui/core';
 import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
      
 
-export const getProducts = async (): Promise<CartItemType[]> =>
+export const getProducts = async (): Promise<BasketItemType[]> =>
 await (await fetch('http://localhost:3001/products/info')).json();
 
 export const ProductList = () => {
-  const { data, isLoading, error } = useQuery<CartItemType[]>(
+  const { data, isLoading, error } = useQuery<BasketItemType[]>(
     'products',
     getProducts
   );

@@ -1,26 +1,18 @@
 // Types
-import { CartItemType } from '../CartItemType';
+import { BasketItemType } from '../BasketItemType';
 import {MyButtonGrid} from '../../Components/Buttons/Buttons';
 // Styles
 import { Wrapper } from './Item.styles';
-/* import './Item.css'; */
-import {
-  Link,
-} from "react-router-dom";
+import {Link,} from "react-router-dom";
 
 type Props = {
-  item: CartItemType;
-  handleAddToCart: (clickedItem: CartItemType) => void;
+  item: BasketItemType;
+  handleAddToCart: (clickedItem: BasketItemType) => void;
 };
 
 const Item: React.FC<Props> = ({ item, handleAddToCart}) => (
   <Wrapper>
-    <Link to={{
-     pathname: `${item.productId}`,
-     state: {
-     productObject: item
-     }
-   }}>
+    <Link to={{pathname: `${item.productId}`, state: {productObject: item}}}>
     <img src={item.img_path} alt={item.name} />
     </Link>
     <div>

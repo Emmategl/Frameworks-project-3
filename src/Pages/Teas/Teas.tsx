@@ -10,15 +10,15 @@ import { HandleAddToCart } from '../../Components/HandleAddToCart';
 // Styles
 import { Wrapper, StyledButton } from '../../App.styles';
 // Types
-import { CartItemType } from '../../Components/CartItemType';
+import { BasketItemType } from '../../Components/BasketItemType';
 import MediaQuery from 'react-responsive';
 import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
 
-const getTeas = async (): Promise<CartItemType[]> =>
+const getTeas = async (): Promise<BasketItemType[]> =>
 await (await fetch('http://localhost:3001/product/categories/Tea')).json();
 
 const Teas = () => {
-  const { data, isLoading, error } = useQuery<CartItemType[]>(
+  const { data, isLoading, error } = useQuery<BasketItemType[]>(
     'products',
     getTeas
   );

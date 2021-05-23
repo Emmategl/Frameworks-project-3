@@ -6,14 +6,14 @@ import Grid from '@material-ui/core/Grid';
 // Styles
 import { Wrapper, StyledButton } from '../../../App.styles';
 import React, { useContext } from 'react';
-import { CartItemType } from '../../../Components/CartItemType';
+import { BasketItemType } from '../../../Components/BasketItemType';
 import { HandleAddToCart } from '../../../Components/HandleAddToCart';
 import { FormContext } from '../../Login/FormContext';
 import {FormData} from '../../../Pages/Login/LoginForm';
 import MediaQuery from 'react-responsive';
 
 
-export const getProducts = async (): Promise<CartItemType[]> =>
+export const getProducts = async (): Promise<BasketItemType[]> =>
 await (await fetch('http://localhost:3001/product/popularity/1')).json();
 
 export const Carousel = () => {
@@ -26,7 +26,7 @@ export const Carousel = () => {
     let email = formContext.login.email;
     const [state, setState] = React.useState<FormData>({ firstName: firstName, lastName: lastName, email: email });
 
-  const { data, error } = useQuery<CartItemType[]>(
+  const { data, error } = useQuery<BasketItemType[]>(
     'products',
     getProducts
   );

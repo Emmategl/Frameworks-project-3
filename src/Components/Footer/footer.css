@@ -10,17 +10,17 @@
   .footer {
       display: flex;
       background-color:  rgb(224, 230, 221);
-      /* padding: 3%;
+      padding: 3%;
       width: 100%;
-      margin-top: auto */
+      margin-top: auto
      }
 
-     .footers {
+    /*  .footers {
         background-color:  rgb(224, 230, 221);
-        padding: 3%;
-        /* width: 100%;
-        margin-top: auto */
-       }
+        padding: 3%; 
+         width: 100%;
+        margin-top: auto
+       } */
   
   .navigation {
     flex: 1;

@@ -1,12 +1,12 @@
 import React from "react";
-import { CartItemType } from "./CartItemType";
+import { BasketItemType } from "./BasketItemType";
 
-export const getBasket = async (): Promise<CartItemType[]> =>
+export const getBasket = async (): Promise<BasketItemType[]> =>
 await (await fetch('http://localhost:3001/customers/1/basketDetails')).json();
 
 
 
-export async function HandleAddToCart(clickedItem: CartItemType) {
+export async function HandleAddToCart(clickedItem: BasketItemType) {
     try {
             const isItemInCart = (await getBasket()).some(item => item.productId === clickedItem.productId); 
             if (isItemInCart) {

@@ -1,7 +1,0 @@
-.button{
-    background-color: black;
-}
-
-.button:disabled { /* Increase the specificity */
-    background-color: white;
-  }

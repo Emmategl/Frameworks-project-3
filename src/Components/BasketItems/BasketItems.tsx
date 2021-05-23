@@ -1,15 +1,14 @@
 import Button from '@material-ui/core/Button';
 // Types
-import { CartItemType } from '../CartItemType';
+import { BasketItemType } from '../BasketItemType';
 // Styles
-import { Wrapper } from './BasketItem.styles';
-import './Buttons.css';
+import { BasketItemsWrapper } from './BasketItems.styles';
 import {MyButton} from '../Buttons/Buttons';
 import { CSSProperties } from 'react';
 
 type Props = {
-  item: CartItemType;
-  addToCart: (clickedItem: CartItemType) => void;
+  item: BasketItemType;
+  addToCart: (clickedItem: BasketItemType) => void;
   decrementFromCart: (productId: number) => void;
   removeFromCart: (productId: number) => void;
 };
@@ -19,7 +18,7 @@ const myStyles: CSSProperties = {
 }
 
 const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeFromCart }) => (
-  <Wrapper>
+  <BasketItemsWrapper>
     <div>
       <h3>{item.name}</h3>
       <div className='information'>
@@ -55,7 +54,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeF
       </div>
     </div>
     <img src={item.img_path} alt={item.name} />
-  </Wrapper>
+  </BasketItemsWrapper>
 );
 
 export default CartItem;

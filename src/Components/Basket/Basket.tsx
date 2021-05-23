@@ -1,6 +1,6 @@
-import CartItem from '../BasketItems/BasketItem';
-import { Wrapper } from './Basket.styles';
-import { CartItemType } from '../CartItemType';
+import CartItem from '../BasketItems/BasketItems';
+import { BasketWrapper } from './Basket.styles';
+import { BasketItemType } from '../BasketItemType';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../Pages/Login/FormContext';
 import {FormData} from '../../Pages/Login/LoginForm';
@@ -9,14 +9,14 @@ import { MyButton } from '../Buttons/Buttons';
 
 
 export type Props =  {
-  cartItems: CartItemType[];
-  addToCart: (clickedItem: CartItemType) => void;
+  cartItems: BasketItemType[];
+  addToCart: (clickedItem: BasketItemType) => void;
   decrementFromCart: (id: number) => void;
   removeFromCart: (id: number) => void;
 };
 
 const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, removeFromCart }) => {
-  const calculateTotal = (items: CartItemType[]) =>
+  const calculateTotal = (items: BasketItemType[]) =>
   items.reduce((ack: number, item) => ack + item.quantity * item.price, 0);
 
   const formContext = useContext(FormContext)
@@ -29,7 +29,7 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, remove
     const [state, setState] = React.useState<FormData>({ email: email, firstName: firstName, lastName: lastName});
     
     return (
-    <Wrapper>
+    <BasketWrapper>
       {state.firstName ? <>
       <h2>{state.firstName}, here is your current basket</h2>
       </> : <h2>Your current basket</h2>
@@ -45,7 +45,7 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, decrementFromCart, remove
         />
       ))}
       <h2>Total: {calculateTotal(cartItems).toFixed(2)} DKK</h2>
-    </Wrapper>
+    </BasketWrapper>
   );
 };
 

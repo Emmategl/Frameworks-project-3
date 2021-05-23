@@ -2,15 +2,15 @@ import { useQuery } from "react-query";
 import { Wrapper } from "../../App.styles";
 import {HandleAddToCart} from "../../Components/HandleAddToCart";
 import './ProductDescription.css';
-import { CartItemType } from "../../Components/CartItemType";
+import { BasketItemType } from "../../Components/BasketItemType";
 import { MyButton } from '../../Components/Buttons/Buttons';
 import MediaQuery from "react-responsive";
 import construction from "../../Images/Construction/Construction.gif";
 
 function ProductDescription ({match}: {match: any}) {
-      const getProduct = async (): Promise<CartItemType> =>
+      const getProduct = async (): Promise<BasketItemType> =>
       await (await fetch('http://localhost:3001/products/'+ match.params.productId)).json(); 
-      const {data} = useQuery<CartItemType>(
+      const {data} = useQuery<BasketItemType>(
         'product',
         getProduct
       );

@@ -1,5 +1,5 @@
-// Types
-export type CartItemType = {
+// Type
+export type BasketItemType = {
     productId: number;
     category: string;
     description: string;

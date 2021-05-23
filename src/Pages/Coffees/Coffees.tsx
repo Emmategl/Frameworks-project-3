@@ -8,16 +8,16 @@ import Grid from '@material-ui/core/Grid';
 import { Wrapper, StyledButton } from '../../App.styles';
 import React from 'react';
 // Types
-import { CartItemType } from '../../Components/CartItemType';
+import { BasketItemType } from '../../Components/BasketItemType';
 import { HandleAddToCart } from '../../Components/HandleAddToCart';
 import MediaQuery from 'react-responsive';
 import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
 
-const getCoffees = async (): Promise<CartItemType[]> =>
+const getCoffees = async (): Promise<BasketItemType[]> =>
 await (await fetch('http://localhost:3001/product/categories/Coffee')).json();
 
 const Coffees = () => {
-  const { data, isLoading, error } = useQuery<CartItemType[]>(
+  const { data, isLoading, error } = useQuery<BasketItemType[]>(
     'products',
     getCoffees
   );

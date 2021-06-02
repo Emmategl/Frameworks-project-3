@@ -8,4 +8,5 @@ export type BasketItemType = {
     name: string;
     quantity: number;
     longDescription: string;
+    popularity: number;
   };

@@ -42,7 +42,6 @@ export function LoginForm() {
   let firstName = formContext.login.firstName;
   let lastName = formContext.login.lastName;
   
-
   const history = useHistory()
 
   const [state, setState] = React.useState<FormData>({email: email, firstName: firstName, lastName: lastName});

@@ -1,20 +1,17 @@
+// React
 import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
+import MediaQuery from 'react-responsive';
+import React, { useContext } from 'react';
 // Components
 import Item from '../../../Components/Item/Item';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Grid from '@material-ui/core/Grid';
-// Styles
-import { Wrapper, StyledButton } from '../../../App.styles';
-import React, { useContext } from 'react';
+import { getPopularProducts } from '../../../Components/FetchFunctionality';
 import { BasketItemType } from '../../../Components/BasketItemType';
 import { HandleAddToCart } from '../../../Components/BasketFunctionality';
 import { FormContext } from '../../Login/FormContext';
-import {FormData} from '../../../Pages/Login/LoginForm';
-import MediaQuery from 'react-responsive';
-
-
-export const getProducts = async (): Promise<BasketItemType[]> =>
-await (await fetch('http://localhost:3001/product/popularity/1')).json();
+import {FormData} from '../../Login/LoginForm';
+// Styles
+import { Wrapper} from '../../../App.styles';
+import Grid from '@material-ui/core/Grid';
 
 export const Carousel = () => {
     const formContext = useContext(FormContext)
@@ -28,7 +25,7 @@ export const Carousel = () => {
 
   const { data, error } = useQuery<BasketItemType[]>(
     'products',
-    getProducts
+    getPopularProducts
   );
   
   if (error) return <div>Something went wrong ...</div>;

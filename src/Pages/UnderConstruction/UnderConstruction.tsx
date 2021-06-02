@@ -7,7 +7,7 @@ function UnderConstruction() {
 
     return (
         <Wrapper>
-        <h1>Page is under construction...</h1>
+        <h1>The webpage is under construction...</h1>
         <img id = "gif" src={construction} alt="Website is under construction"></img>
         </Wrapper>
       );

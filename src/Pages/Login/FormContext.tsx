@@ -24,6 +24,7 @@ export const FormContext = React.createContext<IFormContext | undefined>(
 
   export function LoginProvider({children}: Props){
     const [login, updateName] = useState<LoginInfo>(init)
+    
     const updateNameFun = (email: string, firstName: string, lastName: string) => {
         updateName((prev) => ({...prev, ...{email:email, firstName:firstName, lastName:lastName}})) 
       }

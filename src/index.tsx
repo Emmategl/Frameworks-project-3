@@ -5,14 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { LoginProvider } from './Pages/Login/FormContext';
+import { CheckBoxProvider } from './Components/CheckBoxContext';
 
 const client = new QueryClient();
 
 ReactDOM.render(
   <QueryClientProvider client={client}>
+    <CheckBoxProvider>
      <LoginProvider>
     <App />
     </LoginProvider>
+    </CheckBoxProvider>
   </QueryClientProvider>,
   document.getElementById('root')
 );

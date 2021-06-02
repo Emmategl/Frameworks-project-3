@@ -1,10 +1,10 @@
-import TopPicture from '../../Pages/Home/Components/topPictures';
+import TopPicture from './Components/TopPictures';
 /* import Carousel from '../../Test/Carousel'; */
-import PictureBanner from '../../Pages/Home/Components/pictureBanner';
+import PictureBanner from './Components/PictureBanner';
 import { FormContext } from '../Login/FormContext';
 import React, { useContext } from "react";
 import {FormData} from '../../Pages/Login/LoginForm';
-import { Carousel } from './Components/Carousel';
+import { Carousel } from './Components/PopularProducts';
 
 function Home() {
 

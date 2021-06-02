@@ -1,22 +1,20 @@
-// Types
 import { BasketItemType } from '../../BasketItemType';
-// Styles
 import { BasketItemsWrapper } from './BasketItems.styles';
 import {MyButton} from '../../Buttons/Buttons';
 import { CSSProperties } from 'react';
 
-type Props = {
+type BasketItemProps = {
   item: BasketItemType;
-  addToCart: (clickedItem: BasketItemType) => void;
-  decrementFromCart: (productId: number) => void;
-  removeFromCart: (productId: number) => void;
+  addToBasket: (clickedItem: BasketItemType) => void;
+  decrementFromBasket: (productId: number) => void;
+  removeFromBasket: (productId: number) => void;
 };
 
 const myStyles: CSSProperties = {
   textAlign: "center"
 }
 
-const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeFromCart }) => (
+const BasketItem: React.FC<BasketItemProps> = ({ item, addToBasket, decrementFromBasket, removeFromBasket }) => (
   <BasketItemsWrapper>
     <div>
       <h3>{item.name}</h3>
@@ -29,7 +27,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeF
           size='small'
           disableElevation
           variant='contained'
-          onClick={() => addToCart(item)}
+          onClick={() => addToBasket(item)}
         >
           +
         </MyButton>
@@ -38,7 +36,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeF
           size='small'
           disableElevation
           variant='contained'
-          onClick={() => decrementFromCart(item.productId)}
+          onClick={() => decrementFromBasket(item.productId)}
         >
           -
         </MyButton>
@@ -46,7 +44,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeF
         size='small'
         disableElevation
         variant='contained'
-        onClick={() => removeFromCart(item.productId)}
+        onClick={() => removeFromBasket(item.productId)}
         >
         Remove
       </MyButton>
@@ -56,4 +54,4 @@ const CartItem: React.FC<Props> = ({ item, addToCart, decrementFromCart, removeF
   </BasketItemsWrapper>
 );
 
-export default CartItem;
+export default BasketItem;

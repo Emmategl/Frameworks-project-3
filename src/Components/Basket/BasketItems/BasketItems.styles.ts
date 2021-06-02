@@ -10,8 +10,7 @@ export const BasketItemsWrapper = styled.div`
     flex: 1;
   }
 
-  .information,
-  .buttons {
+  .information, .buttons {
     display: flex;
     justify-content: space-between;
   }

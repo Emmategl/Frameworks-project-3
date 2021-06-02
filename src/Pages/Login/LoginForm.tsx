@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import CSS from "csstype";
 import { useHistory } from "react-router-dom";
 import { FormContext } from "./FormContext";
-import { MyButton } from '../../Components/Buttons/Buttons';
+import { MyButton } from "../../Components/Buttons/Buttons";
 import { Wrapper } from "../../App.styles";
 
 const divStyle: CSS.Properties = {
   marginBottom: "15px",
-
 };
 const labelStyle: CSS.Properties = {
   display: "inline-block",
   width: "100px",
   textAlign: "right",
   marginRight: "15px",
-  
 };
 
 export interface FormData {
@@ -25,84 +23,94 @@ export interface FormData {
 }
 
 interface FormErrors {
-    email?: string;
-    firstName?: string;
-    lastName?: string;
-  }
-
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+}
 
 export function LoginForm() {
-  
-  const formContext = useContext(FormContext)
-    // check conext
-    if (!formContext)
-    throw(new Error("FormContext is undefined!"))
-  
+  //Retrieve the formContext where information about the customer is stored.
+  const formContext = useContext(FormContext);
+  if (!formContext) {
+    throw new Error("FormContext is undefined!");
+  }
+
   let email = formContext.login.email;
   let firstName = formContext.login.firstName;
   let lastName = formContext.login.lastName;
-  
-  const history = useHistory()
 
-  const [state, setState] = React.useState<FormData>({email: email, firstName: firstName, lastName: lastName});
+  const history = useHistory();
+
+  const [state, setState] = React.useState<FormData>({
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
+  });
   const [errors, setErrors] = React.useState<FormErrors>({});
 
   const validateEmail = (value: string): FormErrors => {
-    const regNumber = RegExp(/^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i);
+    const regNumber = RegExp(
+      /^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i
+    );
     if (!regNumber.test(value)) {
       return { email: "Not a valid email" };
     }
     return { email: undefined };
   };
- 
+
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({ ...prev, ...{ email: event.target.value } }));
     setErrors((prev) => ({ ...prev, ...validateEmail(event.target.value) }));
   };
 
   const validateFirstName = (value: string): FormErrors => {
-    const regName: RegExp = /^([a-zA-Z]{2,}\s*)+$/;
+    const regName: RegExp = /^([A-ZÆØÅa-zæøå]{2,}\s*)+$/;
     if (!regName.test(value)) {
       return { firstName: "Not a valid firstname" };
-    } else if (value.length > 15) {
-      return { firstName: "Must be 15 characters or less" };
+    } else if (value.length > 10) {
+      return { firstName: "Must be 10 characters or less" };
     }
     return { firstName: undefined };
   };
 
   const handleFirstName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({ ...prev, ...{ firstName: event.target.value } }));
-    setErrors((prev) => ({ ...prev, ...validateFirstName(event.target.value) }));
+    setErrors((prev) => ({
+      ...prev,
+      ...validateFirstName(event.target.value),
+    }));
   };
-
 
   const validateLastName = (value: string): FormErrors => {
     const regName: RegExp = /^([A-ZÆØÅa-zæøå]{2,}\s*)+$/;
     if (!regName.test(value)) {
       return { lastName: "Not a valid lastname" };
-    } else if (value.length > 15) {
-      return { lastName: "Must be 15 characters or less" };
+    } else if (value.length > 20) {
+      return { lastName: "Must be 20 characters or less" };
     }
     return { lastName: undefined };
   };
-  
+
   const handleLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState((prev) => ({ ...prev, ...{ lastName: event.target.value } }));
     setErrors((prev) => ({ ...prev, ...validateLastName(event.target.value) }));
   };
 
   const validate = (): FormErrors => {
-    return { ...validateEmail(state.email), ...validateFirstName(state.firstName), ...validateLastName(state.lastName) }
+    return {
+      ...validateEmail(state.email),
+      ...validateFirstName(state.firstName),
+      ...validateLastName(state.lastName),
+    };
   };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const valErrors = validate();
-    if (valErrors.email || valErrors.firstName || valErrors.lastName)
-      return
+    if (valErrors.email || valErrors.firstName || valErrors.lastName) return;
     else {
-      formContext.updateName(state.email, state.firstName, state.lastName)
-      history.goBack()
+      formContext.updateName(state.email, state.firstName, state.lastName);
+      history.goBack();
     }
   };
 
@@ -162,16 +170,20 @@ export function LoginForm() {
                 alignItems: "left",
                 marginBottom: "500px",
               }}
-              >
-              
+            >
               <MyButton className="btn-primary" type="submit">
-                Save 
+                Save
               </MyButton>
-              <MyButton className="btn-secondary" onClick={() => history.goBack()}>Cancel</MyButton>
+              <MyButton
+                className="btn-secondary"
+                onClick={() => history.goBack()}
+              >
+                Cancel
+              </MyButton>
             </div>
           </form>
         </Col>
       </Row>
-      </Wrapper>
+    </Wrapper>
   );
 }

@@ -1,54 +1,39 @@
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
-// Components
+import {useQuery} from 'react-query';
 import Item from '../../Components/Item/Item';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
-// Styles
-import { Wrapper, StyledButton } from '../../App.styles';
-import React, { useContext, useEffect } from 'react';
+import { Wrapper } from '../../App.styles';
+import React from 'react';
 import { HandleAddToCart } from '../../Components/BasketFunctionality';
 import { BasketItemType } from "../../Components/BasketItemType";
 import MediaQuery from 'react-responsive'
-import { useMediaQuery } from 'react-responsive'
-import { createStyles, withStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core';
 import { StyledLinearProgress } from '../../Components/StyledLinearProgress';
 import { getAllProducts } from '../../Components/FetchFunctionality';
-import { CheckBox } from '../../Components/Checkbox';
-import { BoxContext, checkBoz } from '../../Components/CheckBoxContext';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 
-     
+export const AllProducts = () => {
 
-export const ProductList = () => {
-  const boxContext = useContext(BoxContext)
-  if (!boxContext)
-  throw(new Error("FormContext is undefined!"))
-  
-  let checked = boxContext.checkBox.checked;
-  let name = boxContext.checkBox.name
-  const [checkBoxes, setCheckBoxes] = React.useState<checkBoz>({ checked: checked, name:name});
-
-  const handleC = (event: { target: { name: string; checked: boolean; }; }) => {
+  //Make a state for the checkbox
+  const [checkBoxes, setCheckBoxes] = React.useState({checked: false,});
+  const handleChange = (event: { target: { name: string; checked: boolean; }; }) => {
     setCheckBoxes({ ...checkBoxes, [event.target.name]: event.target.checked });
-};
+  };
 
+  //Retrieve the list of products
   const { data, isLoading, error } = useQuery<BasketItemType[]>(
     'products',
     getAllProducts
-    
   );
-
   if (isLoading) return <StyledLinearProgress color="primary"/>;
-  if (error) return <div>Something went wrong ...</div>;
+  if (error) return <div>Sorry something went wrong when fetching the products ...</div>;
 
+  //Check if the checkbox is checked. If it is, filter the list of products based on popularity.
   if (checkBoxes.checked == true){
-    var filtered = data?.filter(a => a.popularity == 1);
+    var filteredData = data?.filter(a => a.popularity == 1);
   }
   else{
-    filtered = data
+    filteredData = data
   }
 
   return (
@@ -58,47 +43,46 @@ export const ProductList = () => {
         and tea in many flavours. We only sell coffee beans of the highest quality, so if you are looking for freshly roasted
         filter or espresso coffee, have a look at our large selection. We not only select our coffee carefully, but also our
         selection of teas. That is why you can find a wide range of exclusive and tasty teas with us.
-        </p>
-      <br></br>
-  <FormGroup row>
-  <FormControlLabel
-    control={
-    <Checkbox
-    checked={checkBoxes.checked}
-    onChange={handleC}
-    name="checked" />}
-    label="See our best selling products"
-  />
-  </FormGroup>
-      <MediaQuery minWidth={1024}>
-      <Grid container spacing={3}>
-        {filtered?.map(item => (
-          <Grid item key={item.productId} xs={12} sm={3}>
-            <Item item={item} handleAddToCart={HandleAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
-      </MediaQuery>
-      <MediaQuery maxWidth={1024}>
-      <Grid container spacing={3}>
-        {data?.map(item => (
-          <Grid item key={item.productId} xs={12} sm={4}>
-            <Item item={item} handleAddToCart={HandleAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
-      </MediaQuery>
-      <MediaQuery maxWidth={600}>
-      <Grid container spacing={3}>
-        {data?.map(item => (
-          <Grid item key={item.productId} xs={12} sm={7}>
-            <Item item={item} handleAddToCart={HandleAddToCart} />
-          </Grid>
-        ))}
-      </Grid>
-      </MediaQuery>
+      </p>
+    <FormGroup row>
+      <FormControlLabel
+        control={
+        <Checkbox
+        checked={checkBoxes.checked}
+        onChange={handleChange}
+        name="checked" />}
+        label="See our best selling products"
+      />
+    </FormGroup>
+    <MediaQuery minWidth={1024}>
+    <Grid container spacing={3}>
+      {filteredData?.map(item => (
+        <Grid item key={item.productId} xs={12} sm={3}>
+          <Item item={item} handleAddToBasket={HandleAddToCart} />
+        </Grid>
+      ))}
+    </Grid>
+    </MediaQuery>
+    <MediaQuery maxWidth={1024}>
+    <Grid container spacing={3}>
+      {filteredData?.map(item => (
+        <Grid item key={item.productId} xs={12} sm={4}>
+          <Item item={item} handleAddToBasket={HandleAddToCart} />
+        </Grid>
+      ))}
+    </Grid>
+    </MediaQuery>
+    <MediaQuery maxWidth={600}>
+    <Grid container spacing={3}>
+      {filteredData?.map(item => (
+        <Grid item key={item.productId} xs={12} sm={7}>
+          <Item item={item} handleAddToBasket={HandleAddToCart} />
+        </Grid>
+      ))}
+    </Grid>
+    </MediaQuery>
     </Wrapper>
   );
 };
 
-export default ProductList;
+export default AllProducts;

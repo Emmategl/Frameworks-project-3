@@ -1,4 +1,4 @@
-// Type
+
 export type BasketItemType = {
     productId: number;
     category: string;

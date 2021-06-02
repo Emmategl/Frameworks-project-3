@@ -11,3 +11,12 @@ await (await fetch('http://localhost:3001/product/category/2')).json();
 
 export const getPopularProducts = async (): Promise<BasketItemType[]> =>
 await (await fetch('http://localhost:3001/product/popularity/1')).json();
+
+
+
+
+
+
+
+
+

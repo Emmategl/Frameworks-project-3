@@ -7,12 +7,13 @@ type BasketItemProps = {
   item: BasketItemType;
   addToBasket: (clickedItem: BasketItemType) => void;
   decrementFromBasket: (productId: number) => void;
-  removeFromBasket: (productId: number) => void;
+  removeFromBasket: (clickedItem: BasketItemType) => void;
 };
 
 const myStyles: CSSProperties = {
   textAlign: "center"
 }
+
 
 const BasketItem: React.FC<BasketItemProps> = ({ item, addToBasket, decrementFromBasket, removeFromBasket }) => (
   <BasketItemsWrapper>
@@ -44,7 +45,8 @@ const BasketItem: React.FC<BasketItemProps> = ({ item, addToBasket, decrementFro
         size='small'
         disableElevation
         variant='contained'
-        onClick={() => removeFromBasket(item.productId)}
+        onClick={() => removeFromBasket(item)}
+       
         >
         Remove
       </MyButton>

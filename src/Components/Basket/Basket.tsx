@@ -9,7 +9,7 @@ export type BasketProps = {
   BasketItems: BasketItemType[];
   addToBasket: (clickedItem: BasketItemType) => void;
   decrementFromBasket: (id: number) => void;
-  removeFromBasket: (id: number) => void;
+  removeFromBasket: (clickedItem: BasketItemType) => void;
 };
 
 const Basket: React.FC<BasketProps> = ({

@@ -52,9 +52,9 @@ export async function HandleDecrementFromCart(id: number) {
   }
 }
 
-export async function HandleRemoveFromCart(id: number) {
+export async function HandleRemoveFromCart(clickedItem: BasketItemType) {
   try {
-    await fetch("http://localhost:3001/customers/1/basket/" + id, {
+    await fetch("http://localhost:3001/customers/1/basket/" + clickedItem.productId, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

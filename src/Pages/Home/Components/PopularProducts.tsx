@@ -35,7 +35,7 @@ export const PopularProducts = () => {
 
   return (
     <Wrapper>
-      {state.firstName ? (
+      {state.firstName.length ? (
         <>
           <h2>{state.firstName}, see our best selling products</h2>
         </>

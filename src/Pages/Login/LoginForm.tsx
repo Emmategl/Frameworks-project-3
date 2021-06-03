@@ -114,6 +114,11 @@ export function LoginForm() {
     }
   };
 
+  const onLogout = () => {
+    formContext.updateName("", "", "");
+    history.goBack();
+};
+
   return (
     <Wrapper>
       <Row>
@@ -171,14 +176,12 @@ export function LoginForm() {
                 marginBottom: "500px",
               }}
             >
-              <MyButton className="btn-primary" type="submit">
-                Save
+              <MyButton  type="submit">
+                Login
               </MyButton>
-              <MyButton
-                className="btn-secondary"
-                onClick={() => history.goBack()}
+              <MyButton onClick={()=>onLogout()}
               >
-                Cancel
+                Logout
               </MyButton>
             </div>
           </form>

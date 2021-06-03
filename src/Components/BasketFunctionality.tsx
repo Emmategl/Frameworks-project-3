@@ -57,12 +57,8 @@ export async function HandleDecrementFromCart(id: number) {
 
 export async function HandleRemoveFromCart(id: number) {
   try {
-    const response = await fetch("http://localhost:3001/customers/1/basket/", {
+    const response = await fetch("http://localhost:3001/customers/1/basket/" + id, {
       method: "DELETE",
-      body: JSON.stringify({
-        productId: id,
-        quantity: 1,
-      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },

@@ -6,14 +6,14 @@ import { FormContext } from "../../Pages/Login/FormContext";
 import { FormData } from "../../Pages/Login/LoginForm";
 
 export type BasketProps = {
-  cartItems: BasketItemType[];
+  BasketItems: BasketItemType[];
   addToBasket: (clickedItem: BasketItemType) => void;
   decrementFromBasket: (id: number) => void;
   removeFromBasket: (id: number) => void;
 };
 
-const Cart: React.FC<BasketProps> = ({
-  cartItems: BasketItems,
+const Basket: React.FC<BasketProps> = ({
+  BasketItems,
   addToBasket,
   decrementFromBasket,
   removeFromBasket,
@@ -27,12 +27,12 @@ const Cart: React.FC<BasketProps> = ({
   let email = formContext.login.email;
   let firstName = formContext.login.firstName;
   let lastName = formContext.login.lastName;
-  const [state, setState] = React.useState<FormData>({
+  const [state] = React.useState<FormData>({
     email: email,
     firstName: firstName,
     lastName: lastName,
   });
-
+  
   return (
     <BasketWrapper>
       {state.firstName ? (
@@ -57,4 +57,4 @@ const Cart: React.FC<BasketProps> = ({
   );
 };
 
-export default Cart;
+export default Basket;

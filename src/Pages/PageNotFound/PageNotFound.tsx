@@ -7,7 +7,7 @@ function PageNotFound() {
     return (
       <Wrapper>
       <h1>404: Page not found</h1>
-       <img src={notFound} id="gif"  />
+       <img src={notFound} id="gif" alt="Page not found"  />
        </Wrapper>
       );
   }

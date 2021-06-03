@@ -29,8 +29,8 @@ export const AllProducts = () => {
   if (error) return <div>Sorry something went wrong when fetching the products ...</div>;
 
   //Check if the checkbox is checked. If it is, filter the list of products based on popularity.
-  if (checkBoxes.checked == true){
-    var filteredData = data?.filter(a => a.popularity == 1);
+  if (checkBoxes.checked){
+    var filteredData = data?.filter(a => a.popularity === 1);
   }
   else{
     filteredData = data

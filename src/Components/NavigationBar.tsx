@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import React from "react";
-import Cart from "./Basket/Basket";
+import Basket from "./Basket/Basket";
 import Drawer from "@material-ui/core/Drawer";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
@@ -36,8 +36,8 @@ const NavigationBar = () => {
   return (
     <div className="App">
       <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart
-          cartItems={cartItems}
+        <Basket
+          BasketItems={cartItems}
           addToBasket={HandleAddToCart}
           decrementFromBasket={HandleDecrementFromCart}
           removeFromBasket={HandleRemoveFromCart}

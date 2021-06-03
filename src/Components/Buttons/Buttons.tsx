@@ -17,7 +17,7 @@ export const MyButton = styled(Button)({
   margin: "4px",
 });
 
-export const MyButtonGrid = styled(Button)({
+export const ItemButton = styled(Button)({
   color: "black",
   "&:hover": {
     color: "black",

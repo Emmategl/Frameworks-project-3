@@ -9,17 +9,14 @@ import { StyledLinearProgress } from "../../Components/StyledLinearProgress";
 import { getCoffees } from "../../Components/FetchFunctionality";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
+import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
-import React from "react";
 
 const Coffees = () => {
   //Make a state for the checkbox
   const [checkBoxes, setCheckBoxes] = useState({ checked: false });
 
-  const handleChange = (event: {
-    target: { name: string; checked: boolean };
-  }) => {
+  const handleChange = (event: {target: { name: string; checked: boolean };}) => {
     setCheckBoxes({ ...checkBoxes, [event.target.name]: event.target.checked });
   };
 
@@ -34,8 +31,8 @@ const Coffees = () => {
     return <div>Sorry something went wrong when fetching the products ...</div>;
 
   //Check if the checkbox is checked. If it is, filter the list of products based on popularity.
-  if (checkBoxes.checked == true) {
-    var filteredData = data?.filter((item) => item.popularity == 1);
+  if (checkBoxes.checked) {
+    var filteredData = data?.filter((item) => item.popularity === 1);
   } else {
     filteredData = data;
   }

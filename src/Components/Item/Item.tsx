@@ -1,5 +1,5 @@
 import { BasketItemType } from "../BasketItemType";
-import { MyButtonGrid } from "../../Components/Buttons/Buttons";
+import { ItemButton } from "../../Components/Buttons/Buttons";
 import { ItemWrapper } from "./Item.styles";
 import { Link } from "react-router-dom";
 
@@ -20,9 +20,9 @@ const Item: React.FC<Props> = ({ item, handleAddToBasket }) => (
       <p>{item.description}</p>
       <h4>{item.price} DKK</h4>
     </div>
-    <MyButtonGrid onClick={() => handleAddToBasket(item)}>
+    <ItemButton onClick={() => handleAddToBasket(item)}>
       Add to cart
-    </MyButtonGrid>
+    </ItemButton>
   </ItemWrapper>
 );
 

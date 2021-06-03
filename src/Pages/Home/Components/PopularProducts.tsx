@@ -18,7 +18,7 @@ export const PopularProducts = () => {
   let firstName = formContext.login.firstName;
   let lastName = formContext.login.lastName;
   let email = formContext.login.email;
-  const [state, setState] = React.useState<FormData>({
+  const [state] = React.useState<FormData>({
     firstName: firstName,
     lastName: lastName,
     email: email,
